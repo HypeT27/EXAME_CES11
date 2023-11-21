@@ -1,4 +1,5 @@
 #include "Player.h"
+
 void Player::initComponents() {
 
 }
@@ -8,8 +9,8 @@ void Player::initVariables() {
 }
 
 Player::Player(float x, float y, sf::Texture* texture) {
-    this->initVariables();
-    this->initComponents();
+    //this->initVariables();
+    //this->initComponents();
 
     this->createSprite(texture);
     this->setPosition(x, y);
@@ -44,17 +45,34 @@ void Player::Animation(sf::Clock clock) {
             else
                 rectSourceSprite.left += 93;
 
-            totalElapsedTime -= animationInterval;
         }
         sprite->setTextureRect(rectSourceSprite);
     }
     else{
         firstTimeWalking = true;
     }
+
+
     if(isAttacking &&!isTakingDamage && !isDead){
+        if(clock.getElapsedTime().asSeconds() > 1.0f){
+            if(firstTimeAttacking){
+                rectSourceSprite.left = 1488;
+                firstTimeAttacking = false;
+            }
+            if (rectSourceSprite.left == 2418)
+                rectSourceSprite.left = 1488;
+            else
+                rectSourceSprite.left += 93;
 
-
+            totalElapsedTime -= animationInterval;
+        }
+        sprite->setTextureRect(rectSourceSprite);
     }
+    else{
+        firstTimeAttacking = true;
+    }
+
+
     if(isTakingDamage){
 
     }
@@ -64,4 +82,14 @@ void Player::Animation(sf::Clock clock) {
     }
     clock.restart();
 }
+
+float Player::getX() const {
+    return sprite->getPosition().x;
+}
+
+float Player::getY() const {
+    return sprite->getPosition().y;
+}
+
+
 

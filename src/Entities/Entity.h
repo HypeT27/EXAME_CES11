@@ -36,7 +36,8 @@ public:
     float movementSpeed;
     Entity();
     ~Entity();
-    void createSprite(sf::Texture* texture);
+
+    virtual void createSprite(sf::Texture* texture);
 
     void setPosition(const float x, const float y);
     void move(const float& dt, float x, float y);

@@ -36,34 +36,35 @@ void Entity::move(const float& dt, float dir_x, const float dir_y) {
 void Entity::update(const float& dt) {
     notMoving = true;
     isAttacking = false;
-        if (sf::Keyboard::isKeyPressed((sf::Keyboard::A)) ||
+    if (sf::Keyboard::isKeyPressed((sf::Keyboard::A)) ||
         sf::Keyboard::isKeyPressed((sf::Keyboard::Left))){
             this->move(dt, -1.f, 0.f);
             notMoving = false;
-        }
-        if (sf::Keyboard::isKeyPressed((sf::Keyboard::S)) ||
+    }
+    if (sf::Keyboard::isKeyPressed((sf::Keyboard::S)) ||
             sf::Keyboard::isKeyPressed((sf::Keyboard::Down))){
             this->move(dt, 0.f, 1.f);
             notMoving = false;
-        }
-        if (sf::Keyboard::isKeyPressed((sf::Keyboard::W)) ||
+    }
+    if (sf::Keyboard::isKeyPressed((sf::Keyboard::W)) ||
             sf::Keyboard::isKeyPressed((sf::Keyboard::Up))){
             this->move(dt, 0.f, -1.f);
             notMoving = false;
-        }
-        if (sf::Keyboard::isKeyPressed((sf::Keyboard::D)) ||
+    }
+    if (sf::Keyboard::isKeyPressed((sf::Keyboard::D)) ||
             sf::Keyboard::isKeyPressed((sf::Keyboard::Right))){
             this->move(dt, 1.f, 0.f);
             notMoving = false;
-        }
-        if(sf::Mouse::isButtonPressed((sf::Mouse::Left))) {
+    }
+    if(sf::Mouse::isButtonPressed((sf::Mouse::Left))) {
             isAttacking = true;
-        }
+    }
 }
 
 void Entity::render(sf::RenderTarget* target) {
-    if(this->sprite)
+    if (this->sprite)
         target->draw(*this->sprite);
+
 }
 
 
