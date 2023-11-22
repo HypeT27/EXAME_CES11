@@ -6,8 +6,7 @@
 
 class Player : public Entity{
 private:
-    float totalElapsedTime = 0.0f;
-    float animationInterval = 50.f;
+    int cont = 0;
     bool firstTimeWalking = true;
     bool firstTimeAttacking = true;
     sf::IntRect rectSourceSprite{0, 0, 93, 58};
@@ -18,7 +17,7 @@ public:
     ~Player();
     float getX() const;
     float getY() const;
-
+    bool attack();
     void Animation(sf::Clock clock);
 };
 

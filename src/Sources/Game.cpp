@@ -74,14 +74,14 @@ void Game::update() {
     this->updateSFMLEvents();
 
     if(!this->states.empty()) {
-        this->player->update(this->dt);
-        this->enemy->Update(dtClock);
-        this->states.top()->updateInput(this->dt);
 
+        if(!this->player->attack())
+            this->player->update(this->dt);
+        this->enemy->followPlayer(dtClock);
+        this->states.top()->updateInput(this->dt);
 
         this->player->Animation(dtClock);
         this->enemy->Animation(dtClock);
-
 
 
         if (this->states.top()->getQuit()) {

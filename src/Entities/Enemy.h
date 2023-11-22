@@ -10,9 +10,10 @@
 
 class Enemy : public Entity{
 private:
+    int cont = 0;
     sf::IntRect rectSourceSprite{0, 0, 32, 32};
     sf::Vector2f direction;
-    sf::RectangleShape stopFollowingShape;
+    sf::CircleShape stopFollowingShape;
 
     float stopFollowing;
 
@@ -20,7 +21,7 @@ private:
     bool isLeft = true;
     bool isDown = true;
 
-    bool startShoot;
+    bool startShoot = false;
 
     sf::Vector2f playerPos;
     Player* playerEntity;
@@ -28,7 +29,7 @@ private:
 public:
     Enemy(float x, float y, sf::Texture* texture, Player* player);
     void Update();
-    void Update(sf::Clock clock);
+    void followPlayer(sf::Clock clock);
     void Animation(sf::Clock clock);
     void createSprite(sf::Texture* texture) override;
 };

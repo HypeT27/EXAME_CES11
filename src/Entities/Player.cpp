@@ -21,31 +21,27 @@ Player::~Player() {
 }
 void Player::Animation(sf::Clock clock) {
     if (notMoving && !isAttacking && !isTakingDamage && !isDead) {
-
-        if(clock.getElapsedTime().asSeconds()> 1.0f){
-
             if (rectSourceSprite.left >= 651)
                 rectSourceSprite.left = 0;
             else
-                rectSourceSprite.left += 93;
+                if(cont % 7 == 0)
+                    rectSourceSprite.left += 93;
 
-        }
         sprite->setTextureRect(rectSourceSprite);
     }
 
     if (!notMoving && !isAttacking && !isTakingDamage && !isDead) {
 
-        if(clock.getElapsedTime().asSeconds() > 1.0f) {
             if(firstTimeWalking){
                 rectSourceSprite.left = 744;
                 firstTimeWalking = false;
             }
+
             if (rectSourceSprite.left == 1395)
                 rectSourceSprite.left = 744;
             else
-                rectSourceSprite.left += 93;
-
-        }
+                if(cont % 7 == 0)
+                    rectSourceSprite.left += 93;
         sprite->setTextureRect(rectSourceSprite);
     }
     else{
@@ -54,19 +50,19 @@ void Player::Animation(sf::Clock clock) {
 
 
     if(isAttacking &&!isTakingDamage && !isDead){
-        if(clock.getElapsedTime().asSeconds() > 1.0f){
+
             if(firstTimeAttacking){
                 rectSourceSprite.left = 1488;
                 firstTimeAttacking = false;
             }
-            if (rectSourceSprite.left == 2418)
+            if (rectSourceSprite.left == 2325)
                 rectSourceSprite.left = 1488;
             else
-                rectSourceSprite.left += 93;
+                if(cont % 7 == 0)
+                    rectSourceSprite.left += 93;
 
-            totalElapsedTime -= animationInterval;
-        }
-        sprite->setTextureRect(rectSourceSprite);
+
+            sprite->setTextureRect(rectSourceSprite);
     }
     else{
         firstTimeAttacking = true;
@@ -80,7 +76,7 @@ void Player::Animation(sf::Clock clock) {
     if(isDead){
 
     }
-    clock.restart();
+    cont++;
 }
 
 float Player::getX() const {
@@ -89,6 +85,14 @@ float Player::getX() const {
 
 float Player::getY() const {
     return sprite->getPosition().y;
+}
+
+bool Player::attack() {
+    if(sf::Mouse::isButtonPressed((sf::Mouse::Left))) {
+        isAttacking = true;
+        return true;
+    }
+    return false;
 }
 
 

@@ -37,9 +37,9 @@ void Entity::update(const float& dt) {
     notMoving = true;
     isAttacking = false;
     if (sf::Keyboard::isKeyPressed((sf::Keyboard::A)) ||
-        sf::Keyboard::isKeyPressed((sf::Keyboard::Left))){
-            this->move(dt, -1.f, 0.f);
-            notMoving = false;
+        sf::Keyboard::isKeyPressed((sf::Keyboard::Left))) {
+        this->move(dt, -1.f, 0.f);
+        notMoving = false;
     }
     if (sf::Keyboard::isKeyPressed((sf::Keyboard::S)) ||
             sf::Keyboard::isKeyPressed((sf::Keyboard::Down))){
@@ -55,9 +55,6 @@ void Entity::update(const float& dt) {
             sf::Keyboard::isKeyPressed((sf::Keyboard::Right))){
             this->move(dt, 1.f, 0.f);
             notMoving = false;
-    }
-    if(sf::Mouse::isButtonPressed((sf::Mouse::Left))) {
-            isAttacking = true;
     }
 }
 
