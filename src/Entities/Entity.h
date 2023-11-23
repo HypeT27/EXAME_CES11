@@ -10,7 +10,9 @@
 #include <fstream>
 #include <sstream>
 #include <stack>
+#include <memory>
 #include <map>
+#include <vector>
 #include <cmath>
 
 #include <SFML/Graphics.hpp>
@@ -20,31 +22,36 @@
 #include <SFML/Network.hpp>
 
 
+
 class Entity {
-private:
-    void initVariables();
 protected:
-    sf::Texture* texture;
-    sf::Sprite* sprite;
+    sf::Texture* texture{};
+    sf::Sprite* sprite{};
+
     bool notMoving = true;
     bool isAttacking = false;
     bool isTakingDamage = false;
     bool isDead = false;
 
+    bool isLeft = false;
+    bool isDown = false;
+    bool isUp = false;
+    bool isRight = false;
 
 public:
-    float movementSpeed;
+    float movementSpeed{};
     Entity();
     ~Entity();
 
     virtual void createSprite(sf::Texture* texture);
 
-    void setPosition(const float x, const float y);
-    void move(const float& dt, float x, float y);
+    void setPosition(float x, float y);
+    void move(float x, float y);
 
-    void update(const float& dt);
     void render(sf::RenderTarget* target);
 
+    float getX() const;
+    float getY() const;
 };
 
 

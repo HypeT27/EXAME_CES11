@@ -2,7 +2,7 @@
 
 void Game::initTextures(){
     this->playerTexture = new sf::Texture;
-    this->playerTexture->loadFromFile("../src/Images/Animations.png");
+    this->playerTexture->loadFromFile("../src/Images/Animations2.png");
     this->enemyTexture = new sf::Texture;
     this->enemyTexture->loadFromFile("../src/Images/EnemyShaman.png");
 }
@@ -36,7 +36,7 @@ void Game::initStates() {
 Game::Game() {
     this->initTextures();
     this->player = new Player(0,0, playerTexture);
-    this->enemy = new Enemy(750, 500, enemyTexture, this->player);
+    this->enemy = new Enemy(300, 300, enemyTexture, this->player);
     this->initWindow();
     this->initStates();
 }
@@ -45,6 +45,14 @@ Game::~Game() {
     delete this->window;
     delete this->playerTexture;
     delete this->enemyTexture;
+    delete this->player;
+    delete this->enemy;
+
+    for(auto bullet : activeBullets)
+        delete bullet;
+
+    for(auto attack : activeAttacks)
+        delete attack;
 
     while(!this->states.empty()) {
         delete this->states.top();
@@ -61,7 +69,8 @@ void Game::endApplication() {
 
 void Game::updateDt() {
     //updates de dt variable with the time it takes to update and render one frame
-    this->dt = this->dtClock.getElapsedTime().asSeconds();
+    dt = dtClock.getElapsedTime();
+    dtClock.restart();
 }
 
 void Game::updateSFMLEvents() {
@@ -75,14 +84,46 @@ void Game::update() {
 
     if(!this->states.empty()) {
 
-        if(!this->player->attack())
-            this->player->update(this->dt);
-        this->enemy->followPlayer(dtClock);
-        this->states.top()->updateInput(this->dt);
 
-        this->player->Animation(dtClock);
+
+        this->player->update(this->dt);
+        this->player->Dash();
+        this->enemy->followPlayer();
+        this->player->Animation(activeAttacks);
         this->enemy->Animation(dtClock);
+        this->enemy->attack(activeBullets);
 
+        for(auto it = activeBullets.begin(); it != activeBullets.end();) {
+            (*it)->followDirection();
+            (*it)->Animation();
+            if(this->player->checkDamage(*it)) {
+                it = activeBullets.erase(it);
+                std::cout << "You Lose!!";
+                this->window->close();
+            }
+
+            if((*it)->getX() > 800 || (*it)->getY() > 600)
+                it = activeBullets.erase(it);
+            else ++it;
+        }
+
+        for(auto it = activeAttacks.begin(); it != activeAttacks.end();) {
+            (*it)->followDirection(this->window);
+            if(this->enemy->checkDamage(*it)) {
+                hitCounter++;
+                if(hitCounter == 5) {
+                    std::cout << "You Won!!";
+                    this->window->close();
+                }
+                it = activeAttacks.erase(it);
+                break;
+            }
+            if((*it)->getX() > 800 || (*it)->getY() > 600)
+                it = activeAttacks.erase(it);
+            else ++it;
+        }
+
+        this->states.top()->updateInput(this->dt);
 
         if (this->states.top()->getQuit()) {
             delete this->states.top();
@@ -101,6 +142,12 @@ void Game::render() {
     if(!this->states.empty()) {
         this->player->render(this->window);
         this->enemy->render(this->window);
+        for(auto & activeBullet : activeBullets){
+            (*activeBullet).render(this->window);
+        }
+        for(auto & activeAttack : activeAttacks){
+            (*activeAttack).render(this->window);
+        }
     }
 
     this->window->display();

@@ -1,24 +1,38 @@
 #ifndef EXAME_CES11_PLAYER_H
 #define EXAME_CES11_PLAYER_H
+
 #include "Entity.h"
 
-
+class playerAttack;
 
 class Player : public Entity{
 private:
     int cont = 0;
+    bool canDash = true;
+    bool canAttack = true;
+
+    sf::CircleShape hitBox;
+
+    sf::Time attackTimer;
+    sf::Time attackCD = sf::seconds((1.0f));
+    sf::Time dashTimer;
+    sf::Time dashCD = sf::seconds(2.0f);
+
+    bool firstTimeMoving = true;
     bool firstTimeWalking = true;
     bool firstTimeAttacking = true;
-    sf::IntRect rectSourceSprite{0, 0, 93, 58};
-    void initVariables();
-    void initComponents();
+    sf::IntRect rectSourceSprite{0, 0, 38, 38};
+
+    sf::Texture* attackTexture;
+
+    void initTextures();
 public:
     Player(float x, float y, sf::Texture* texture);
     ~Player();
-    float getX() const;
-    float getY() const;
-    bool attack();
-    void Animation(sf::Clock clock);
+    void update(sf::Time dt);
+    void Animation(std::vector<playerAttack*>& activeAttacks);
+    void Dash();
+    bool checkDamage(const Entity* entity);
 };
 
 
