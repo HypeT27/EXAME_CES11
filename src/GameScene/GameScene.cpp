@@ -1,5 +1,8 @@
 #include "GameScene.h"
 
+GameScene::~GameScene(){
+    delete this->Sprite;
+}
 GameScene::GameScene(const std::string &backgroundFile/*, const std::vector<std::string> &obstacleFiles*/) {
     if (!backgroundTexture.loadFromFile(backgroundFile)) {
         std::cout<<"GameScene ERR";
@@ -18,12 +21,12 @@ GameScene::GameScene(const std::string &backgroundFile/*, const std::vector<std:
     }*/
 }
 
-void GameScene::draw(sf::RenderWindow &window) {
+void GameScene::render(sf::RenderWindow &window) {
     window.draw(backgroundSprite);
 
-    for (const auto& sprite : obstacleSprites) {
+    /*for (const auto& sprite : obstacleSprites) {
         window.draw(sprite);
-    }
+    }*/
 }
 
 

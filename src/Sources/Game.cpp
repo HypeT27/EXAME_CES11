@@ -5,7 +5,8 @@ void Game::initTextures(){
     this->playerTexture->loadFromFile("../src/Images/Animations.png");
     this->enemyTexture = new sf::Texture;
     this->enemyTexture->loadFromFile("../src/Images/EnemyShaman.png");
-    this-
+    this->gamesceneTexture = new sf::Texture;
+    this->gamesceneTexture->loadFromFile("../src/Images/scenario.png");
 }
 
 void Game::initWindow(){
@@ -38,7 +39,7 @@ Game::Game() {
     this->initTextures();
     this->player = new Player(0,0, playerTexture);
     this->enemy = new Enemy(750, 500, enemyTexture, this->player);
-    this->initWindow();
+    this->gamesceneTexture = new GameScene("../src/Images/scenario");
     this->initStates();
 }
 
@@ -46,6 +47,7 @@ Game::~Game() {
     delete this->window;
     delete this->playerTexture;
     delete this->enemyTexture;
+    delete this->gamesceneTexture;
 
     while(!this->states.empty()) {
         delete this->states.top();
@@ -102,6 +104,7 @@ void Game::render() {
     if(!this->states.empty()) {
         this->player->render(this->window);
         this->enemy->render(this->window);
+        this->gamescene->render(this->window);
     }
 
     this->window->display();

@@ -11,8 +11,10 @@ private:
     std::vector<sf::Sprite> obstacleSprites;
 
 public:
-    GameScene(const std::string& backgroundFile/*, const std::vector<std::string>& obstacleFiles*/);
-    void draw(sf::RenderWindow& window);
+    GameScene(const std::string& backgroundFile);
+    ~GameScene();
+
+    void render(sf::RenderWindow& window);
 };
 
 

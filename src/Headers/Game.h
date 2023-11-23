@@ -3,6 +3,7 @@
 
 #include "../States/GameState.h"
 #include "../Entities/Enemy.h"
+#include "../GameScene/GameScene.h"
 
 class Game{
 protected:
@@ -16,6 +17,7 @@ protected:
     float dt;
     Player* player;
     Enemy* enemy;
+    GameScene* gamescene;
     std::stack<State*> states;
     //Initialization
     void initWindow();
