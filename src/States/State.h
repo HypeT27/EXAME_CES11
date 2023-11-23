@@ -18,7 +18,7 @@ public:
 
     void checkForQuit();
 
-    void updateInput(const float& dt);
+    void updateInput(sf::Time dt);
     void render(sf::RenderTarget* target = nullptr);
 };
 

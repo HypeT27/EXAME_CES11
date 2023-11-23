@@ -20,7 +20,7 @@ void State::checkForQuit() {
         this->quit = true;
 }
 
-void State::updateInput(const float &dt) {
+void State::updateInput(sf::Time dt) {
         this->checkForQuit();
 }
 

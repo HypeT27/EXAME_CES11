@@ -4,24 +4,33 @@
 #include "../States/GameState.h"
 #include "../Entities/Enemy.h"
 #include "../GameScene/GameScene.h"
+#include "../Entities/enemyBullet.h"
+#include "../Entities//playerAttack.h"
 
 class Game{
 protected:
-    //Variables
+
+    int hitCounter = 0;
     sf::Texture* playerTexture;
     sf::Texture* enemyTexture;
     sf::Texture* gamesceneTexture;
     sf::RenderWindow* window;
     sf::Event sfEvent;
     sf::Clock dtClock;
-    float dt;
+    sf::Time dt;
+
     Player* player;
     Enemy* enemy;
     GameScene* gamescene;
+
+    std::vector<enemyBullet*> activeBullets;
+    std::vector<playerAttack*> activeAttacks;
+
     std::stack<State*> states;
-    //Initialization
+
     void initWindow();
     void initStates();
+    void initTextures();
 
 public:
 
@@ -35,7 +44,7 @@ public:
     void update();
     void render();
     void run();
-    void initTextures();
+
 };
 
 
