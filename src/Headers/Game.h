@@ -9,6 +9,7 @@ protected:
     //Variables
     sf::Texture* playerTexture;
     sf::Texture* enemyTexture;
+    sf::Texture* gamesceneTexture;
     sf::RenderWindow* window;
     sf::Event sfEvent;
     sf::Clock dtClock;

@@ -5,6 +5,7 @@ void Game::initTextures(){
     this->playerTexture->loadFromFile("../src/Images/Animations.png");
     this->enemyTexture = new sf::Texture;
     this->enemyTexture->loadFromFile("../src/Images/EnemyShaman.png");
+    this-
 }
 
 void Game::initWindow(){

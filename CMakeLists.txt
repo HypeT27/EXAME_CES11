@@ -22,6 +22,8 @@ add_executable(EXAME_CES11 src/Sources/main.cpp
         src/Entities/Player.h
         src/Entities/Enemy.cpp
         src/Entities/Enemy.h
+        src/GameScene/GameScene.cpp
+        src/GameScene/GameScene.h
 )
 
 target_link_libraries(EXAME_CES11 sfml-graphics)
