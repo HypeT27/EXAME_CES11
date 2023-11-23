@@ -10,6 +10,15 @@ Call Stack (most recent call first):
   cmake-build-debug/_deps/sfml-src/src/SFML/Audio/CMakeLists.txt:70 (sfml_find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
--- Configuring done (0.9s)
--- Generating done (0.1s)
--- Build files have been written to: C:/Users/gabri/CLionProjects/EXAME_CES11/cmake-build-debug
+-- Configuring done (3.2s)
+CMake Error at CMakeLists.txt:12 (add_executable):
+  Cannot find source file:
+
+    HEAD
+
+
+CMake Error at CMakeLists.txt:12 (add_executable):
+  No SOURCES given to target: EXAME_CES11
+
+
+CMake Generate step failed.  Build files cannot be regenerated correctly.

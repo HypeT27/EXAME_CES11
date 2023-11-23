@@ -1,0 +1,3 @@
+C:/Users/jpcru/CLionProjects/EXAME_CES11/cmake-build-debug-mingw/_deps/sfml-subbuild/CMakeFiles/sfml-populate.dir
+C:/Users/jpcru/CLionProjects/EXAME_CES11/cmake-build-debug-mingw/_deps/sfml-subbuild/CMakeFiles/edit_cache.dir
+C:/Users/jpcru/CLionProjects/EXAME_CES11/cmake-build-debug-mingw/_deps/sfml-subbuild/CMakeFiles/rebuild_cache.dir
