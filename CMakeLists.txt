@@ -27,8 +27,8 @@ add_executable(EXAME_CES11 src/Sources/main.cpp
         src/Entities/enemyBullet.h
         src/Entities/playerAttack.cpp
         src/Entities/playerAttack.h
-        src/GameScene/GameScene.cpp
         src/GameScene/GameScene.h
+        src/GameScene/GameScene.cpp
 
 )
 

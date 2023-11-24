@@ -9,7 +9,7 @@ void Enemy::initTextures() {
 Enemy::Enemy(float x, float y, sf::Texture *texture, Player* player) {
     this->createSprite(texture);
     this->setPosition(x,y);
-
+    
     initTextures();
 
     this->movementSpeed = 0.5f;
@@ -28,8 +28,7 @@ Enemy::Enemy(float x, float y, sf::Texture *texture, Player* player) {
 }
 
 Enemy::~Enemy() {
-    delete this->sprite;
-    delete this->bulletTexture;
+
 }
 
 void Enemy::attack(std::vector<enemyBullet*>& activeBullets) {
@@ -136,6 +135,14 @@ bool Enemy::checkDamage(const Entity* entity) {
         return true;
     }
     return false;
+}
+
+int Enemy::hitCount() const {
+    return this->hitCounter;
+}
+
+int Enemy::hitCountAdd() {
+    return ++hitCounter;
 }
 
 

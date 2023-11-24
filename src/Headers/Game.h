@@ -9,8 +9,7 @@
 
 class Game{
 protected:
-
-    int hitCounter = 0;
+    int enemiesCounter = 2;
     sf::Texture* playerTexture;
     sf::Texture* enemyTexture;
     sf::Texture* gamesceneTexture;
@@ -21,8 +20,9 @@ protected:
 
     Player* player;
     Enemy* enemy;
+    Enemy* enemy2;
     GameScene* gamescene;
-
+    std::vector<Enemy*> aliveEnemies;
     std::vector<enemyBullet*> activeBullets;
     std::vector<playerAttack*> activeAttacks;
 
