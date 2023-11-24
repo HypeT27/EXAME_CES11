@@ -7,6 +7,24 @@ void Game::initTextures(){
     this->enemyTexture->loadFromFile("../src/Images/EnemyShaman.png");
     this->gamesceneTexture = new sf::Texture;
     this->gamesceneTexture->loadFromFile("../src/Images/scenario.jpg");
+    this->estradaTexture = new sf::Texture;
+    this->estradaTexture->loadFromFile("../src/Images/Estrada.png");
+    this->lakeTexture = new sf::Texture;
+    this->lakeTexture->loadFromFile ("../src/Images/Lake.png");
+    this->tree1Texture = new sf::Texture;
+    this->tree1Texture->loadFromFile("../src/Images/Tree1.png");
+    this->tree2Texture = new sf::Texture;
+    this->tree2Texture->loadFromFile("../src/Images/Tree2.png");
+    this->tree3Texture = new sf::Texture;
+    this->tree3Texture->loadFromFile("../src/Images/Tree3.png");
+    this->tree4Texture = new sf::Texture;
+    this->tree4Texture->loadFromFile("../src/Images/Tree4.png");
+    this->cactusTexture = new sf::Texture;
+    this->cactusTexture->loadFromFile("../src/Images/Cactus.png");
+    this->stoneTexture = new sf::Texture;
+    this->stoneTexture->loadFromFile("../src/Images/Stone.png");
+
+
 
 }
 
@@ -41,6 +59,16 @@ Game::Game() {
     this->player = new Player(0,0, playerTexture);
     this->enemy = new Enemy(750, 500, enemyTexture, this->player);
     this->gamescene = new GameScene(0, 0, gamesceneTexture);
+    this->estrada = new GameScene(0, 0, estradaTexture);
+    this->lake = new GameScene (-20, -380, lakeTexture);
+    this->tree1 = new GameScene(20, 0, tree1Texture);
+    this->tree2 = new GameScene(-540, -420, tree2Texture);
+    this->tree3 = new GameScene(-670, -250, tree3Texture);
+    this->tree4 = new GameScene(-340, -80, tree4Texture);
+    this->cactus = new GameScene(-525, -145, cactusTexture);
+    this->stone = new GameScene(-690, -20, stoneTexture);
+
+
 
     this->enemy = new Enemy(300, 300, enemyTexture, this->player);
     this->initWindow();
@@ -53,9 +81,29 @@ Game::~Game() {
     delete this->playerTexture;
     delete this->enemyTexture;
     delete this->gamesceneTexture;
+    delete this->estradaTexture;
+    delete this->lakeTexture;
+    delete this->tree1Texture;
+    delete this->tree2Texture;
+    delete this->tree3Texture;
+    delete this->tree4Texture;
+    delete this->cactusTexture;
+    delete this->stoneTexture;
+
+
 
     delete this->player;
     delete this->enemy;
+    gamescene->~GameScene();
+    estrada->~GameScene();
+    lake->~GameScene();
+    tree1->~GameScene();
+    tree2->~GameScene();
+    tree3->~GameScene();
+    tree4->~GameScene();
+    cactus->~GameScene();
+    stone->~GameScene();
+
 
     for(auto bullet : activeBullets)
         delete bullet;
@@ -149,6 +197,14 @@ void Game::render() {
 
     if(!this->states.empty()) {
         this->gamescene->render(this->window);
+        this->estrada->render(this->window);
+        this->lake->render(this->window);
+        this->tree1->render(this->window);
+        this->tree2->render(this->window);
+        this->tree3->render(this->window);
+        this->tree4->render(this->window);
+        this->cactus->render(this->window);
+        this->stone->render(this->window);
         this->player->render(this->window);
         this->enemy->render(this->window);
 

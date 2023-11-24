@@ -14,6 +14,15 @@ protected:
     sf::Texture* playerTexture;
     sf::Texture* enemyTexture;
     sf::Texture* gamesceneTexture;
+    sf::Texture* estradaTexture;
+    sf::Texture* lakeTexture;
+    sf::Texture* tree1Texture;
+    sf::Texture* tree2Texture;
+    sf::Texture* tree3Texture;
+    sf::Texture* tree4Texture;
+    sf::Texture* cactusTexture;
+    sf::Texture* stoneTexture;
+
     sf::RenderWindow* window;
     sf::Event sfEvent;
     sf::Clock dtClock;
@@ -22,6 +31,16 @@ protected:
     Player* player;
     Enemy* enemy;
     GameScene* gamescene;
+    GameScene* estrada;
+    GameScene* lake;
+    GameScene* tree1;
+    GameScene* tree2;
+    GameScene* tree3;
+    GameScene* tree4;
+    GameScene* cactus;
+    GameScene* stone;
+
+
 
     std::vector<enemyBullet*> activeBullets;
     std::vector<playerAttack*> activeAttacks;
