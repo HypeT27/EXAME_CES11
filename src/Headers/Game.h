@@ -9,20 +9,40 @@
 
 class Game{
 protected:
-    int enemiesCounter = 2;
+    int enemiesCounter;
     sf::Texture* playerTexture;
     sf::Texture* enemyTexture;
     sf::Texture* gamesceneTexture;
+    sf::Texture* estradaTexture;
+    sf::Texture* lakeTexture;
+    sf::Texture* tree1Texture;
+    sf::Texture* tree2Texture;
+    sf::Texture* tree3Texture;
+    sf::Texture* tree4Texture;
+    sf::Texture* cactusTexture;
+    sf::Texture* stoneTexture;
+
     sf::RenderWindow* window;
     sf::Event sfEvent;
     sf::Clock dtClock;
     sf::Time dt;
 
     Player* player;
-    Enemy* enemy;
-    Enemy* enemy2;
+
     GameScene* gamescene;
+
     std::vector<Enemy*> aliveEnemies;
+
+    GameScene* estrada;
+    GameScene* lake;
+    GameScene* tree1;
+    GameScene* tree2;
+    GameScene* tree3;
+    GameScene* tree4;
+    GameScene* cactus;
+    GameScene* stone;
+
+
     std::vector<enemyBullet*> activeBullets;
     std::vector<playerAttack*> activeAttacks;
 

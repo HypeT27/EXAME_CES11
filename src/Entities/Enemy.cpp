@@ -8,6 +8,7 @@ void Enemy::initTextures() {
 
 Enemy::Enemy(float x, float y, sf::Texture *texture, Player* player) {
     this->createSprite(texture);
+    this->sprite->setScale(1.3,1.3);
     this->setPosition(x,y);
     
     initTextures();
@@ -22,7 +23,7 @@ Enemy::Enemy(float x, float y, sf::Texture *texture, Player* player) {
 
     playerEntity = player;
 
-    hitBox.setRadius(16);
+    hitBox.setRadius(21.4);
     hitBox.setPosition(this->getX(), this->getY());
 
 }

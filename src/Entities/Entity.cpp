@@ -9,7 +9,6 @@ Entity::Entity() {
 }
 
 Entity::~Entity() {
-
 }
 
 void Entity::createSprite(sf::Texture* texture) {
