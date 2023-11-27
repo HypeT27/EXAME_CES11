@@ -28,13 +28,12 @@ add_executable(EXAME_CES11 src/Sources/main.cpp
         src/Entities/playerAttack.cpp
         src/Entities/playerAttack.h
         src/GameScene/GameScene.h
-<<<<<<< HEAD
         src/States/MenuState.cpp
         src/States/MenuState.h
-=======
         src/GameScene/GameScene.cpp
->>>>>>> c7560bf113b74f2a8dd631899f7188bf975262c4
-
+        src/States/MenuState.cpp
+        src/Graph/Graph.cpp
+        src/Graph/Graph.h
 )
 
 target_link_libraries(EXAME_CES11 sfml-graphics)

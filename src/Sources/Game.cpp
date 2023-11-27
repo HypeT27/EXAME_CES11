@@ -56,12 +56,10 @@ void Game::initStates() {
 //Constructors/Destructors
 Game::Game() {
     this->initTextures();
-<<<<<<< HEAD
     this->player = new Player(20,300, playerTexture);
-    this->enemy = new Enemy(750, 500, enemyTexture, this->player);
-=======
+
     this->player = new Player(0,0, playerTexture);
->>>>>>> c7560bf113b74f2a8dd631899f7188bf975262c4
+
     this->gamescene = new GameScene(0, 0, gamesceneTexture);
     this->estrada = new GameScene(0, 0, estradaTexture);
     this->lake = new GameScene (-20, -380, lakeTexture);
