@@ -6,6 +6,7 @@
 #include "../GameScene/GameScene.h"
 #include "../Entities/enemyBullet.h"
 #include "../Entities//playerAttack.h"
+#include "../States/MenuState.h"
 
 class Game{
 protected:
