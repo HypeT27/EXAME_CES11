@@ -121,14 +121,6 @@ build CMakeFiles/EXAME_CES11.dir/src/Entities/playerAttack.cpp.obj: CXX_COMPILER
   OBJECT_DIR = CMakeFiles\EXAME_CES11.dir
   OBJECT_FILE_DIR = CMakeFiles\EXAME_CES11.dir\src\Entities
 
-build CMakeFiles/EXAME_CES11.dir/src/GameScene/GameScene.cpp.obj: CXX_COMPILER__EXAME_CES11_unscanned_Debug C$:/Users/jpcru/CLionProjects/EXAME_CES11/src/GameScene/GameScene.cpp || cmake_object_order_depends_target_EXAME_CES11
-  DEFINES = -DSFML_STATIC
-  DEP_FILE = CMakeFiles\EXAME_CES11.dir\src\GameScene\GameScene.cpp.obj.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -IC:/Users/jpcru/CLionProjects/EXAME_CES11/cmake-build-debug-mingw/_deps/sfml-src/include
-  OBJECT_DIR = CMakeFiles\EXAME_CES11.dir
-  OBJECT_FILE_DIR = CMakeFiles\EXAME_CES11.dir\src\GameScene
-
 build CMakeFiles/EXAME_CES11.dir/src/States/MenuState.cpp.obj: CXX_COMPILER__EXAME_CES11_unscanned_Debug C$:/Users/jpcru/CLionProjects/EXAME_CES11/src/States/MenuState.cpp || cmake_object_order_depends_target_EXAME_CES11
   DEFINES = -DSFML_STATIC
   DEP_FILE = CMakeFiles\EXAME_CES11.dir\src\States\MenuState.cpp.obj.d
@@ -136,6 +128,14 @@ build CMakeFiles/EXAME_CES11.dir/src/States/MenuState.cpp.obj: CXX_COMPILER__EXA
   INCLUDES = -IC:/Users/jpcru/CLionProjects/EXAME_CES11/cmake-build-debug-mingw/_deps/sfml-src/include
   OBJECT_DIR = CMakeFiles\EXAME_CES11.dir
   OBJECT_FILE_DIR = CMakeFiles\EXAME_CES11.dir\src\States
+
+build CMakeFiles/EXAME_CES11.dir/src/GameScene/GameScene.cpp.obj: CXX_COMPILER__EXAME_CES11_unscanned_Debug C$:/Users/jpcru/CLionProjects/EXAME_CES11/src/GameScene/GameScene.cpp || cmake_object_order_depends_target_EXAME_CES11
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\EXAME_CES11.dir\src\GameScene\GameScene.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/jpcru/CLionProjects/EXAME_CES11/cmake-build-debug-mingw/_deps/sfml-src/include
+  OBJECT_DIR = CMakeFiles\EXAME_CES11.dir
+  OBJECT_FILE_DIR = CMakeFiles\EXAME_CES11.dir\src\GameScene
 
 
 # =============================================================================
@@ -145,7 +145,7 @@ build CMakeFiles/EXAME_CES11.dir/src/States/MenuState.cpp.obj: CXX_COMPILER__EXA
 #############################################
 # Link the executable EXAME_CES11.exe
 
-build EXAME_CES11.exe: CXX_EXECUTABLE_LINKER__EXAME_CES11_Debug CMakeFiles/EXAME_CES11.dir/src/Sources/main.cpp.obj CMakeFiles/EXAME_CES11.dir/src/Sources/Game.cpp.obj CMakeFiles/EXAME_CES11.dir/src/States/State.cpp.obj CMakeFiles/EXAME_CES11.dir/src/States/GameState.cpp.obj CMakeFiles/EXAME_CES11.dir/src/Entities/Entity.cpp.obj CMakeFiles/EXAME_CES11.dir/src/Entities/Player.cpp.obj CMakeFiles/EXAME_CES11.dir/src/Entities/Enemy.cpp.obj CMakeFiles/EXAME_CES11.dir/src/Entities/enemyBullet.cpp.obj CMakeFiles/EXAME_CES11.dir/src/Entities/playerAttack.cpp.obj CMakeFiles/EXAME_CES11.dir/src/GameScene/GameScene.cpp.obj CMakeFiles/EXAME_CES11.dir/src/States/MenuState.cpp.obj | _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-src/extlibs/libs-mingw/x64/libfreetype.a || _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a
+build EXAME_CES11.exe: CXX_EXECUTABLE_LINKER__EXAME_CES11_Debug CMakeFiles/EXAME_CES11.dir/src/Sources/main.cpp.obj CMakeFiles/EXAME_CES11.dir/src/Sources/Game.cpp.obj CMakeFiles/EXAME_CES11.dir/src/States/State.cpp.obj CMakeFiles/EXAME_CES11.dir/src/States/GameState.cpp.obj CMakeFiles/EXAME_CES11.dir/src/Entities/Entity.cpp.obj CMakeFiles/EXAME_CES11.dir/src/Entities/Player.cpp.obj CMakeFiles/EXAME_CES11.dir/src/Entities/Enemy.cpp.obj CMakeFiles/EXAME_CES11.dir/src/Entities/enemyBullet.cpp.obj CMakeFiles/EXAME_CES11.dir/src/Entities/playerAttack.cpp.obj CMakeFiles/EXAME_CES11.dir/src/States/MenuState.cpp.obj CMakeFiles/EXAME_CES11.dir/src/GameScene/GameScene.cpp.obj | _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-src/extlibs/libs-mingw/x64/libfreetype.a || _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a
   FLAGS = -g
   LINK_LIBRARIES = _deps/sfml-build/lib/libsfml-graphics-s-d.a  _deps/sfml-build/lib/libsfml-window-s-d.a  _deps/sfml-build/lib/libsfml-system-s-d.a  -lwinmm  -lgdi32  -lopengl32  -lglu32  _deps/sfml-src/extlibs/libs-mingw/x64/libfreetype.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\EXAME_CES11.dir

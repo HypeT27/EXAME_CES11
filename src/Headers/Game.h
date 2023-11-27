@@ -29,6 +29,7 @@ protected:
     sf::Time dt;
 
     Player* player;
+    Enemy*enemy;
 
     GameScene* gamescene;
 
