@@ -56,8 +56,12 @@ void Game::initStates() {
 //Constructors/Destructors
 Game::Game() {
     this->initTextures();
+<<<<<<< HEAD
     this->player = new Player(20,300, playerTexture);
     this->enemy = new Enemy(750, 500, enemyTexture, this->player);
+=======
+    this->player = new Player(0,0, playerTexture);
+>>>>>>> c7560bf113b74f2a8dd631899f7188bf975262c4
     this->gamescene = new GameScene(0, 0, gamesceneTexture);
     this->estrada = new GameScene(0, 0, estradaTexture);
     this->lake = new GameScene (-20, -380, lakeTexture);
@@ -68,9 +72,17 @@ Game::Game() {
     this->cactus = new GameScene(-525, -145, cactusTexture);
     this->stone = new GameScene(-690, -20, stoneTexture);
 
+    enemiesCounter = 10;
 
+    for (int i =0; i<enemiesCounter; i++) {
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<> dis(1, 10);
+        int randomX = dis(gen);
+        int randomY = dis(gen);
+        aliveEnemies.push_back(new Enemy(200+50*randomX, 100+40*randomY, enemyTexture, this->player));
+    }
 
-    this->enemy = new Enemy(300, 300, enemyTexture, this->player);
     this->initWindow();
 
     this->initStates();
@@ -90,10 +102,8 @@ Game::~Game() {
     delete this->cactusTexture;
     delete this->stoneTexture;
 
-
-
     delete this->player;
-    delete this->enemy;
+
     gamescene->~GameScene();
     estrada->~GameScene();
     lake->~GameScene();
@@ -111,6 +121,9 @@ Game::~Game() {
     for(auto attack : activeAttacks)
         delete attack;
 
+    for(auto enemies: aliveEnemies)
+        delete enemies;
+
 
     while(!this->states.empty()) {
         delete this->states.top();
@@ -126,7 +139,6 @@ void Game::endApplication() {
 }
 
 void Game::updateDt() {
-    //updates de dt variable with the time it takes to update and render one frame
     dt = dtClock.getElapsedTime();
     dtClock.restart();
 }
@@ -144,10 +156,48 @@ void Game::update() {
 
         this->player->update(this->dt);
         this->player->Dash();
-        this->enemy->followPlayer();
+
+        for (auto it = activeAttacks.begin(); it != activeAttacks.end();) {
+            (*it)->followDirection(this->window);
+
+            bool eraseIt = false;
+            for (auto itEnemy = aliveEnemies.begin(); itEnemy != aliveEnemies.end();) {
+                if (*itEnemy != nullptr && (*itEnemy)->checkDamage(*it)) {
+                    if (*itEnemy != nullptr) {
+                        if ((*itEnemy)->hitCount() == 4) {
+                            enemiesCounter--;
+                            itEnemy = aliveEnemies.erase(itEnemy);
+                            eraseIt = true;
+                        }
+                        else {
+                            (*itEnemy)->hitCountAdd();
+                            eraseIt = true;
+                        }
+                    }
+                    break;
+                }
+                else ++itEnemy;
+            }
+            if ((*it)->getX() > 800 || (*it)->getY() > 600)
+                eraseIt = true;
+
+            if (eraseIt)
+                it = activeAttacks.erase(it);
+            else ++it;
+
+        }
+
+        for(auto & aliveEnemy : aliveEnemies) {
+            if(aliveEnemy != nullptr) {
+                if (aliveEnemy->hitCount() < 5) {
+                    (*aliveEnemy).Animation(dtClock);
+                    (*aliveEnemy).attack(activeBullets);
+                    (*aliveEnemy).followPlayer();
+                }
+            }
+        }
+
         this->player->Animation(activeAttacks);
-        this->enemy->Animation(dtClock);
-        this->enemy->attack(activeBullets);
 
         for(auto it = activeBullets.begin(); it != activeBullets.end();) {
             (*it)->followDirection();
@@ -163,21 +213,12 @@ void Game::update() {
             else ++it;
         }
 
-        for(auto it = activeAttacks.begin(); it != activeAttacks.end();) {
-            (*it)->followDirection(this->window);
-            if(this->enemy->checkDamage(*it)) {
-                hitCounter++;
-                if(hitCounter == 5) {
-                    std::cout << "You Won!!";
-                    this->window->close();
-                }
-                it = activeAttacks.erase(it);
-                break;
-            }
-            if((*it)->getX() > 800 || (*it)->getY() > 600)
-                it = activeAttacks.erase(it);
-            else ++it;
+        if(enemiesCounter == 0){
+            std::cout << "You won!!";
+            this->window->close();
+
         }
+
 
         this->states.top()->updateInput(this->dt);
 
@@ -206,8 +247,13 @@ void Game::render() {
         this->cactus->render(this->window);
         this->stone->render(this->window);
         this->player->render(this->window);
-        this->enemy->render(this->window);
 
+        for(auto & aliveEnemy : aliveEnemies){
+            if(aliveEnemy != nullptr) {
+                (*aliveEnemy).render(this->window);
+
+            }
+        }
 
         for(auto & activeBullet : activeBullets){
             (*activeBullet).render(this->window);

@@ -10,8 +10,7 @@
 
 class Game{
 protected:
-
-    int hitCounter = 0;
+    int enemiesCounter;
     sf::Texture* playerTexture;
     sf::Texture* enemyTexture;
     sf::Texture* gamesceneTexture;
@@ -30,8 +29,11 @@ protected:
     sf::Time dt;
 
     Player* player;
-    Enemy* enemy;
+
     GameScene* gamescene;
+
+    std::vector<Enemy*> aliveEnemies;
+
     GameScene* estrada;
     GameScene* lake;
     GameScene* tree1;
@@ -40,7 +42,6 @@ protected:
     GameScene* tree4;
     GameScene* cactus;
     GameScene* stone;
-
 
 
     std::vector<enemyBullet*> activeBullets;

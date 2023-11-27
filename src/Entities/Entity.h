@@ -14,6 +14,7 @@
 #include <map>
 #include <vector>
 #include <cmath>
+#include <random>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>

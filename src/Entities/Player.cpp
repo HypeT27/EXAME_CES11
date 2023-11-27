@@ -19,7 +19,7 @@ Player::Player(float x, float y, sf::Texture* texture) {
 
 
 Player::~Player() {
-    delete this->sprite;
+    delete this->attackTexture;
 }
 
 void Player::Animation(std::vector<playerAttack*>& activeAttacks) {

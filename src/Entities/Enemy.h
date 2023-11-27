@@ -8,6 +8,7 @@
 
 class Enemy : public Entity{
 private:
+    int hitCounter = 0;
     int cont = 0;
     int contAttack = 0;
     sf::IntRect rectSourceSprite{0, 0, 32, 32};
@@ -34,6 +35,9 @@ public:
     void Animation(sf::Clock clock);
     void createSprite(sf::Texture* texture) override;
     bool checkDamage(const Entity* entity);
+    int hitCount() const;
+    int hitCountAdd();
+
 };
 
 
