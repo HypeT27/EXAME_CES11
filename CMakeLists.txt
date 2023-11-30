@@ -28,10 +28,11 @@ add_executable(EXAME_CES11 src/Sources/main.cpp
         src/Entities/playerAttack.cpp
         src/Entities/playerAttack.h
         src/GameScene/GameScene.h
-        src/States/MenuState.cpp
-        src/States/MenuState.h
         src/GameScene/GameScene.cpp
-
+        src/States/MenuState.h
+        src/States/MenuState.cpp
+        src/Graph/Graph.cpp
+        src/Graph/Graph.h
 
 )
 

@@ -22,6 +22,8 @@ class MenuState {
     std::vector<sf::Text> texts;
     std::vector<std::size_t> sizes;
 
+    bool isOnMenu;
+
 protected:
     void set_values();
     void loop_events();

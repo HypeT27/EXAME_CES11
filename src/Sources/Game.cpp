@@ -60,7 +60,7 @@ Game::Game() {
     this->enemy = new Enemy(750, 500, enemyTexture, this->player);
     this->player = new Player(0,0, playerTexture);
 
-    this->gamescene = new GameScene(0, 0, gamesceneTexture);
+    this->gamescene = new GameScene(0, 0, gamesceneTexture);n 
     this->estrada = new GameScene(0, 0, estradaTexture);
     this->lake = new GameScene (-20, -380, lakeTexture);
     this->tree1 = new GameScene(20, 0, tree1Texture);
