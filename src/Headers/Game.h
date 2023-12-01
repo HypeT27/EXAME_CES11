@@ -1,9 +1,8 @@
 #ifndef CMAKESFMLPROJECT_GAME_H
 #define CMAKESFMLPROJECT_GAME_H
 
-#include "../States/GameState.h"
 #include "../Entities/Enemy.h"
-#include "../GameScene/GameScene.h"
+#include "../GameScene/GameSceneTree.h"
 #include "../Entities/enemyBullet.h"
 #include "../Entities//playerAttack.h"
 #include "../States/MenuState.h"
@@ -11,8 +10,12 @@
 class Game{
 protected:
     int enemiesCounter;
+    int killCounter = 0;
+
     sf::Texture* playerTexture;
     sf::Texture* enemyTexture;
+
+
     sf::Texture* gamesceneTexture;
     sf::Texture* estradaTexture;
     sf::Texture* lakeTexture;
@@ -22,14 +25,14 @@ protected:
     sf::Texture* tree4Texture;
     sf::Texture* cactusTexture;
     sf::Texture* stoneTexture;
+    sf::Texture* bulletTexture;
 
-    sf::RenderWindow* window;
     sf::Event sfEvent;
     sf::Clock dtClock;
     sf::Time dt;
 
     Player* player;
-
+    GameSceneTree* gameSceneTree;
     GameScene* gamescene;
 
     std::vector<Enemy*> aliveEnemies;
@@ -47,24 +50,23 @@ protected:
     std::vector<enemyBullet*> activeBullets;
     std::vector<playerAttack*> activeAttacks;
 
-    std::stack<State*> states;
-
-    void initWindow();
-    void initStates();
     void initTextures();
 
 public:
+    int Kills();
 
     Game();
     ~Game();
 
     //Functions
-    void endApplication();
     void updateDt();
-    void updateSFMLEvents();
-    void update();
-    void render();
-    void run();
+    void update(sf::RenderWindow& window);
+    void render(sf::RenderWindow& window);
+    Player* getPlayer() const;
+    std::vector<Enemy*> getEnemies();
+    std::vector<enemyBullet *> getBullets() const;
+    void addBullet();
+
 
 };
 

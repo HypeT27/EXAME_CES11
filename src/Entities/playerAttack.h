@@ -17,7 +17,10 @@ public:
     playerAttack(float x, float y, sf::Texture* texture);
     ~playerAttack();
     void createSprite(sf::Texture *texture) override;
-    void followDirection(sf::RenderWindow* window);
+    void followDirection(sf::RenderWindow& window);
+
+    sf::Vector2f getDirection(sf::RenderWindow& window);
+    void setDirection(float x, float y);
 };
 
 

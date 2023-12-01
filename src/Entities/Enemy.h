@@ -28,6 +28,7 @@ private:
     void initTextures();
 
 public:
+
     ~Enemy();
     Enemy(float x, float y, sf::Texture* texture, Player* player);
     void attack(std::vector<enemyBullet*>& activeBullets);
@@ -37,6 +38,9 @@ public:
     bool checkDamage(const Entity* entity);
     int hitCount() const;
     int hitCountAdd();
+
+    void serialize(FILE* file) const;
+    void deserialize(FILE* file);
 
 };
 

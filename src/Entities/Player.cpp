@@ -15,11 +15,18 @@ Player::Player(float x, float y, sf::Texture* texture) {
 
     hitBox.setRadius(19);
     hitBox.setPosition(this->getX(),this->getY());
+
 }
 
 
 Player::~Player() {
     delete this->attackTexture;
+}
+
+void Player::setPosition(float x, float y) {
+    if(this->sprite) {
+        this->sprite->setPosition(x, y);
+    }
 }
 
 void Player::Animation(std::vector<playerAttack*>& activeAttacks) {
@@ -149,6 +156,36 @@ bool Player::checkDamage(const Entity* entity) {
         return true;
     }
     return false;
+}
+
+void Player::serialize(FILE* file) const {
+
+    if (this == nullptr) {
+        std::cout << "Jogador nulo\n";
+        return;
+    }
+
+    if (this->sprite == nullptr) {
+        std::cout << "Sprite nulo\n";
+        return;
+    }
+
+    sf::Vector2f position = sprite->getPosition();
+
+    float xValue = position.x;
+    float yValue = position.y;
+
+    fprintf(file, "%f\n", xValue);
+    fprintf(file, "%f\n", yValue);
+}
+
+void Player::deserialize(FILE* file) {
+    float xValue;
+    float yValue;
+    fscanf(file, "%f", &xValue);
+    fscanf(file, "%f", &yValue);
+
+    this->setPosition(xValue, yValue);
 }
 
 
