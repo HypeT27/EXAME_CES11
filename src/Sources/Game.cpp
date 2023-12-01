@@ -30,15 +30,18 @@ void Game::initTextures(){
 //Constructors/Destructors
 Game::Game() : aliveEnemies(), activeBullets(), activeAttacks(){
     this->initTextures();
+<<<<<<< HEAD
 
     this->gameSceneTree = new GameSceneTree();
 
     this->player = new Player(0,180, playerTexture);
+=======
+>>>>>>> a7ec57d1bd68f80b6652869eb80a69bee26a786b
     this->player = new Player(20,300, playerTexture);
     this->enemy = new Enemy(750, 500, enemyTexture, this->player);
     this->player = new Player(0,0, playerTexture);
 
-    this->gamescene = new GameScene(0, 0, gamesceneTexture);
+    this->gamescene = new GameScene(0, 0, gamesceneTexture);n 
     this->estrada = new GameScene(0, 0, estradaTexture);
     this->lake = new GameScene (-20, -380, lakeTexture);
     this->tree1 = new GameScene(20, 0, tree1Texture);

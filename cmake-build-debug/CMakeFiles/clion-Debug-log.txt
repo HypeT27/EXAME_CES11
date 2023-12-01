@@ -10,11 +10,11 @@ Call Stack (most recent call first):
   cmake-build-debug/_deps/sfml-src/src/SFML/Audio/CMakeLists.txt:70 (sfml_find_package)
 This warning is for project developers.  Use -Wno-dev to suppress it.
 
--- Configuring done (0.9s)
+-- Configuring done (1.0s)
 CMake Error at CMakeLists.txt:12 (add_executable):
   Cannot find source file:
 
-    HEAD
+    src/Graph/Graph.cpp
 
 
 CMake Error at CMakeLists.txt:12 (add_executable):
