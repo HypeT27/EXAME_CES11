@@ -32,10 +32,8 @@ protected:
     sf::Time dt;
 
     Player* player;
-<<<<<<< HEAD
+
     GameSceneTree* gameSceneTree;
-=======
->>>>>>> a7ec57d1bd68f80b6652869eb80a69bee26a786b
     Enemy*enemy;
 
     GameScene* gamescene;

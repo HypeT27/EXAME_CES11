@@ -24,6 +24,7 @@ add_executable(EXAME_CES11 src/Sources/main.cpp
         src/Entities/playerAttack.cpp
         src/Entities/playerAttack.h
         src/GameScene/GameScene.h
+        src/States/MenuState.cpp
         src/GameScene/GameScene.cpp
         src/States/MenuState.h
         src/States/MenuState.cpp
@@ -33,8 +34,6 @@ add_executable(EXAME_CES11 src/Sources/main.cpp
         src/Save/GameData.h
         src/GameScene/GameSceneTree.h
         src/GameScene/GameSceneTree.cpp
-        src/Graph/Graph.cpp
-        src/Graph/Graph.h
 
 )
 
