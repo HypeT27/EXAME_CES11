@@ -33,6 +33,8 @@ protected:
 
     Player* player;
     GameSceneTree* gameSceneTree;
+    Enemy*enemy;
+
     GameScene* gamescene;
 
     std::vector<Enemy*> aliveEnemies;

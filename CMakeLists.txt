@@ -24,9 +24,8 @@ add_executable(EXAME_CES11 src/Sources/main.cpp
         src/Entities/playerAttack.cpp
         src/Entities/playerAttack.h
         src/GameScene/GameScene.h
-        src/States/MenuState.cpp
-        src/States/MenuState.h
         src/GameScene/GameScene.cpp
+        src/States/MenuState.h
         src/States/MenuState.cpp
         src/Sources/ScreenHandler.cpp
         src/Headers/ScreenHandler.h
@@ -34,6 +33,9 @@ add_executable(EXAME_CES11 src/Sources/main.cpp
         src/Save/GameData.h
         src/GameScene/GameSceneTree.h
         src/GameScene/GameSceneTree.cpp
+        src/Graph/Graph.cpp
+        src/Graph/Graph.h
+
 )
 
 target_link_libraries(EXAME_CES11 sfml-graphics)

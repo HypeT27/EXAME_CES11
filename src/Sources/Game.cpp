@@ -34,6 +34,19 @@ Game::Game() : aliveEnemies(), activeBullets(), activeAttacks(){
     this->gameSceneTree = new GameSceneTree();
 
     this->player = new Player(0,180, playerTexture);
+    this->player = new Player(20,300, playerTexture);
+    this->enemy = new Enemy(750, 500, enemyTexture, this->player);
+    this->player = new Player(0,0, playerTexture);
+
+    this->gamescene = new GameScene(0, 0, gamesceneTexture);
+    this->estrada = new GameScene(0, 0, estradaTexture);
+    this->lake = new GameScene (-20, -380, lakeTexture);
+    this->tree1 = new GameScene(20, 0, tree1Texture);
+    this->tree2 = new GameScene(-540, -420, tree2Texture);
+    this->tree3 = new GameScene(-670, -250, tree3Texture);
+    this->tree4 = new GameScene(-340, -80, tree4Texture);
+    this->cactus = new GameScene(-525, -145, cactusTexture);
+    this->stone = new GameScene(-690, -20, stoneTexture);
 
     this->gameSceneTree->insert(0,0,gamesceneTexture);
     this->gameSceneTree->insert(0,0,estradaTexture);
