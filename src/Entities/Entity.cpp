@@ -17,7 +17,7 @@ void Entity::createSprite(sf::Texture* texture) {
     this->sprite = new sf::Sprite(*this->texture, rectSourceSprite);
 }
 
-void Entity::setPosition(const float x, const float y) {
+void Entity::setPosition(float x, float y) {
     if(this->sprite)
         this->sprite->setPosition(x, y);
 }
@@ -28,16 +28,19 @@ void Entity::move(const float dir_x, const float dir_y) {
     }
 }
 
-void Entity::render(sf::RenderTarget* target) {
-    target->draw(*this->sprite);
+void Entity::render(sf::RenderTarget& target) {
+    target.draw(*this->sprite);
 }
 
 float Entity::getX() const {
-    return sprite->getPosition().x;
+    return (sprite != nullptr) ? sprite->getPosition().x : 0.0f;
 }
 
 float Entity::getY() const {
-    return sprite->getPosition().y;
+    if(sprite) {
+        return sprite->getPosition().y;
+    }
+    else throw std::runtime_error("Sprite nulo");
 }
 
 

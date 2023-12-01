@@ -13,7 +13,13 @@ public:
     GameScene(int posic_x, int posic_y, sf::Texture *texture);
     ~GameScene();
 
-    void render(sf::RenderTarget* window);
+    void render(sf::RenderTarget& window);
+
+    int posic_x;
+    int posic_y;
+
+    GameScene* rchild;
+    GameScene* lchild;
 };
 
 
