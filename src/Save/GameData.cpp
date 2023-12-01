@@ -14,7 +14,7 @@ void GameData::save(const std::string &filename, Game& Game){
 
         for (size_t i = 0; i < numScores; ++i) {
             int score = scores[i];
-            fprintf(file, "%d\n" , score);
+            fprintf(file, "%d\n", score);
         }
 
         game.getPlayer()->serialize(file);
