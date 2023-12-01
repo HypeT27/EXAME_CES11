@@ -36,15 +36,6 @@ This warning is for project developers.  Use -Wno-dev to suppress it.
 
 -- Found VORBIS: C:/Users/gabri/CLionProjects/EXAME_CES11/cmake-build-debug/_deps/sfml-src/extlibs/libs-mingw/x64/libvorbisenc.a;C:/Users/gabri/CLionProjects/EXAME_CES11/cmake-build-debug/_deps/sfml-src/extlibs/libs-mingw/x64/libvorbisfile.a;C:/Users/gabri/CLionProjects/EXAME_CES11/cmake-build-debug/_deps/sfml-src/extlibs/libs-mingw/x64/libvorbis.a;C:/Users/gabri/CLionProjects/EXAME_CES11/cmake-build-debug/_deps/sfml-src/extlibs/libs-mingw/x64/libogg.a  
 -- Found FLAC: C:/Users/gabri/CLionProjects/EXAME_CES11/cmake-build-debug/_deps/sfml-src/extlibs/libs-mingw/x64/libFLAC.a  
--- Configuring done (3.4s)
-CMake Error at CMakeLists.txt:12 (add_executable):
-  Cannot find source file:
-
-    src/GameScene/GameSceneTree.cppw
-
-
-CMake Error at CMakeLists.txt:12 (add_executable):
-  No SOURCES given to target: EXAME_CES11
-
-
-CMake Generate step failed.  Build files cannot be regenerated correctly.
+-- Configuring done (3.0s)
+-- Generating done (0.1s)
+-- Build files have been written to: C:/Users/gabri/CLionProjects/EXAME_CES11/cmake-build-debug

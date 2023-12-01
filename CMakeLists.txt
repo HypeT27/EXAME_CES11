@@ -34,7 +34,6 @@ add_executable(EXAME_CES11 src/Sources/main.cpp
         src/Save/GameData.h
         src/GameScene/GameSceneTree.h
         src/GameScene/GameSceneTree.cpp
-        src/GameScene/GameSceneTree.cppw
 )
 
 target_link_libraries(EXAME_CES11 sfml-graphics)
