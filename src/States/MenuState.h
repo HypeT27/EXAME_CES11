@@ -3,10 +3,8 @@
 #include "../Entities/Entity.h"
 
 class MenuState {
-
+private:
     bool pressed, theselect;
-
-    int score;
 
     sf::RectangleShape* winclose;
     sf::Font* font;
@@ -28,7 +26,6 @@ class MenuState {
 protected:
     void set_values();
     void loop_events(sf::RenderWindow& window);
-    void ranking();
 
 private:
 
