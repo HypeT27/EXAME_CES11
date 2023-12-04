@@ -8,6 +8,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <fstream>
+#include <string>
 #include <sstream>
 #include <stack>
 #include <memory>
@@ -26,8 +27,8 @@
 
 class Entity {
 protected:
-    sf::Texture* texture{};
-    sf::Sprite* sprite{};
+    sf::Texture* texture;
+    sf::Sprite* sprite;
 
     bool notMoving = true;
     bool isAttacking = false;
@@ -46,10 +47,10 @@ public:
 
     virtual void createSprite(sf::Texture* texture);
 
-    void setPosition(float x, float y);
+    virtual void setPosition(float x, float y);
     void move(float x, float y);
 
-    void render(sf::RenderTarget* target);
+    void render(sf::RenderTarget& target);
 
     float getX() const;
     float getY() const;

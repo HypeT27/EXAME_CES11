@@ -12,10 +12,6 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(EXAME_CES11 src/Sources/main.cpp
         src/Sources/Game.cpp
         src/Headers/Game.h
-        src/States/State.cpp
-        src/States/State.h
-        src/States/GameState.cpp
-        src/States/GameState.h
         src/Entities/Entity.cpp
         src/Entities/Entity.h
         src/Entities/Player.cpp
@@ -28,11 +24,16 @@ add_executable(EXAME_CES11 src/Sources/main.cpp
         src/Entities/playerAttack.cpp
         src/Entities/playerAttack.h
         src/GameScene/GameScene.h
+        src/States/MenuState.cpp
         src/GameScene/GameScene.cpp
         src/States/MenuState.h
         src/States/MenuState.cpp
-        src/Graph/Graph.cpp
-        src/Graph/Graph.h
+        src/Sources/ScreenHandler.cpp
+        src/Headers/ScreenHandler.h
+        src/Save/GameData.cpp
+        src/Save/GameData.h
+        src/GameScene/GameSceneTree.h
+        src/GameScene/GameSceneTree.cpp
 
 )
 

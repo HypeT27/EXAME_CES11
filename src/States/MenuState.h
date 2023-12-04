@@ -3,16 +3,18 @@
 #include "../Entities/Entity.h"
 
 class MenuState {
-    int menuPosic;
+
     bool pressed, theselect;
 
     int score;
 
-    sf::RenderWindow* window;
     sf::RectangleShape* winclose;
     sf::Font* font;
+    sf::Event sfEvent;
     sf::Texture* menuTexture;
     sf::Sprite* menu;
+    sf::Texture* menuBackground;
+    sf::Sprite* background;
 
     sf::Vector2i mousePosic;
     sf::Vector2f mouseCoord;
@@ -22,12 +24,10 @@ class MenuState {
     std::vector<sf::Text> texts;
     std::vector<std::size_t> sizes;
 
-    bool isOnMenu;
 
 protected:
     void set_values();
-    void loop_events();
-    void render();
+    void loop_events(sf::RenderWindow& window);
     void ranking();
 
 private:
@@ -35,7 +35,7 @@ private:
 public:
     MenuState();
     ~MenuState();
-
-    void run_menu();
+    void render(sf::RenderWindow& window);
+    void update(sf::RenderWindow& window);
 };
 #endif //EXAME_CES11_MENUSTATE_H

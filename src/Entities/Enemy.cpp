@@ -36,6 +36,10 @@ void Enemy::attack(std::vector<enemyBullet*>& activeBullets) {
         if (startShoot) {
                 if (rectSourceSprite.left >= 448) {
                     auto pBullet = new enemyBullet(this->getX(), this->getY(), bulletTexture, playerEntity);
+                    pBullet->x1 = this->getX();
+                    pBullet->x2 = this->playerEntity->getX();
+                    pBullet->y1 = this->getY();
+                    pBullet->y2 = this->playerEntity->getY();
                     activeBullets.push_back(pBullet);
                     rectSourceSprite.left = 256;
                 } else if (contAttack % 6 == 0)
@@ -146,8 +150,35 @@ int Enemy::hitCountAdd() {
     return ++hitCounter;
 }
 
+void Enemy::serialize(FILE* file) const {
 
+    if (this == nullptr) {
+        std::cout << "Jogador nulo\n";
+        return;
+    }
 
+    if (this->sprite == nullptr) {
+        std::cout << "Sprite nulo\n";
+        return;
+    }
+
+    sf::Vector2f position = sprite->getPosition();
+
+    float xValue = position.x;
+    float yValue = position.y;
+
+    fprintf(file, "%f\n", xValue);
+    fprintf(file, "%f\n", yValue);
+}
+
+void Enemy::deserialize(FILE* file) {
+    float xValue;
+    float yValue;
+    fscanf(file, "%f", &xValue);
+    fscanf(file, "%f", &yValue);
+
+    this->setPosition(xValue, yValue);
+}
 
 
 

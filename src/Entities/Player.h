@@ -2,6 +2,7 @@
 #define EXAME_CES11_PLAYER_H
 
 #include "Entity.h"
+#include <string>
 
 class playerAttack;
 
@@ -29,10 +30,16 @@ private:
 public:
     Player(float x, float y, sf::Texture* texture);
     ~Player();
+
+    void setPosition(float x, float y) override;
     void update(sf::Time dt);
     void Animation(std::vector<playerAttack*>& activeAttacks);
     void Dash();
     bool checkDamage(const Entity* entity);
+
+    void serialize(FILE* file) const;
+
+    void deserialize(FILE* file);
 };
 
 

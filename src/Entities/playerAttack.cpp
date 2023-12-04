@@ -22,20 +22,26 @@ void playerAttack::createSprite(sf::Texture *texture) {
     this->sprite = new sf::Sprite(*this->texture, rectSourceSprite);
 }
 
-void playerAttack::followDirection(sf::RenderWindow* window) {
-    if(newAttack) {
-        sf::Vector2f cursorPosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(*window));
-        sf::Vector2f entityPosition = sprite->getPosition();
-
-        direction = cursorPosition - entityPosition;
-        float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
-
-        if (length != 0) {
-            direction /= length;
-        }
-    }
+void playerAttack::followDirection(sf::RenderWindow& window) {
+    if(newAttack)
+       direction = getDirection(window);
 
     newAttack = false;
     sprite->move(direction * movementSpeed);
 }
+
+
+sf::Vector2f playerAttack::getDirection(sf::RenderWindow& window) {
+    sf::Vector2f cursorPosition = sf::Vector2f(sf::Mouse::getPosition(window));
+    sf::Vector2f entityPosition = sprite->getPosition();
+
+    direction = cursorPosition - entityPosition;
+    float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+
+    if (length != 0)
+        direction /= length;
+
+    return direction;
+}
+
 
