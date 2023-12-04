@@ -15,11 +15,13 @@ void ScreenHandler::update(sf::RenderWindow& window) {
         case GAMESCREEN:
             game.updateDt();
             game.update(window);
+
             if(game.getEnemiesCounter() == 0){
                 this->renderState = LEVELSCREEN;
                 saveGame();
                 break;
             }
+
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
                 this->renderState = MENUSCREEN;
                 saveGame();
@@ -38,6 +40,7 @@ void ScreenHandler::update(sf::RenderWindow& window) {
                 loadGame();
                 break;
             }
+
         case LEVELSCREEN:
             level.update(window);
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)){
@@ -128,6 +131,7 @@ void ScreenHandler::render(sf::RenderWindow& window) {
 void ScreenHandler::newGame() {
     this->game = Game();
     gameData = GameData(game);
+
     levelsCompleted = 0;
     level.level1.isVisited = false;
     level.level2.isVisited = false;
@@ -138,6 +142,7 @@ void ScreenHandler::newGame() {
 void ScreenHandler::loadGame() {
     this->gameData.load("../src/Save/savegame.txt", game, level, levelsCompleted);
     gameData.printScores();
+
 }
 
 void ScreenHandler::saveGame() {
@@ -159,5 +164,4 @@ Node& ScreenHandler::actualLevel() {
         return level.level4;
     throw std::out_of_range("This level doesn't exists\n");
 }
-
 

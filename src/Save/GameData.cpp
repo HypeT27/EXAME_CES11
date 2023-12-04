@@ -4,6 +4,7 @@
 
 #include "GameData.h"
 
+
 void GameData::save(const std::string &filename, Game& Game, LevelState& Map, int& levelsCompleted){
     map = Map;
     game = Game;
@@ -50,6 +51,7 @@ void GameData::save(const std::string &filename, Game& Game, LevelState& Map, in
         fclose(file);
     }
 }
+
 
 void GameData::load(const std::string &filename, Game& Game, LevelState& Map, int& levelsCompleted) {
     FILE* file = fopen(filename.c_str(), "rb");
@@ -113,12 +115,15 @@ void GameData::load(const std::string &filename, Game& Game, LevelState& Map, in
         for (size_t i = 0; i < numScores; ++i) {
             int NewScore;
             fscanf(file, "%d", &NewScore);
+
             scores.push_back(NewScore);
+
         }
 
         Game.getPlayer()->deserialize(file);
 
         fscanf(file, "%d", &countEnemies);
+
         Game.changeEnemyCounter(countEnemies);
         Game.changeLevel(newLevel);
 

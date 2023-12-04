@@ -3,6 +3,7 @@
 #include "../Entities/Entity.h"
 
 class MenuState {
+
 private:
     bool pressed, theselect;
 
@@ -26,6 +27,8 @@ private:
 protected:
     void set_values();
     void loop_events(sf::RenderWindow& window);
+
+
 
 private:
 

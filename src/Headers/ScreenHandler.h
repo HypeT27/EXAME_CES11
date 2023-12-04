@@ -20,7 +20,9 @@ public:
     Game game;
     GameData gameData;
     MenuState menu;
+
     LevelState level;
+
 
     explicit ScreenHandler();
 
@@ -31,6 +33,7 @@ public:
     void loadGame();
     void newGame();
     void saveGame();
+
     Node& actualLevel();
 
     int renderState = 0;

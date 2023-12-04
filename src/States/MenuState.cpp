@@ -27,7 +27,6 @@ void MenuState::set_values() {
     background->setScale(1.05,1.05);
 
     pressed=theselect= false;
-    font->loadFromFile("../src/Images/Yellow Style.otf"); //achar fonte!!!
     menuTexture->loadFromFile("../src/Images/Menu.png"); //achar textura!!!
     menuBackground->loadFromFile("../src/Images/backgroundmenu.jpg");
 
@@ -40,6 +39,7 @@ void MenuState::render(sf::RenderWindow& window) {
     window.draw(*background);
     window.draw(*menu);
 }
+
 
 
 void MenuState::loop_events(sf::RenderWindow& window) {

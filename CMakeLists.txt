@@ -36,7 +36,6 @@ add_executable(EXAME_CES11 src/Sources/main.cpp
         src/GameScene/GameSceneTree.cpp
         src/Node/Node.cpp
         src/States/LevelState.cpp
-
 )
 
 target_link_libraries(EXAME_CES11 sfml-graphics)

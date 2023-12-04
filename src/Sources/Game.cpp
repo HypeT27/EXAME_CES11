@@ -5,12 +5,27 @@ void Game::initTextures(){
     this->playerTexture->loadFromFile("../src/Images/Animations2.png");
     this->enemyTexture = new sf::Texture;
     this->enemyTexture->loadFromFile("../src/Images/EnemyShaman.png");
-    this->gamesceneTexture = new sf::Texture;
-    this->gamesceneTexture->loadFromFile("../src/Images/scenario.jpg");
-    this->estradaTexture = new sf::Texture;
-    this->estradaTexture->loadFromFile("../src/Images/Estrada.png");
+    this->fundoTexture = new sf::Texture;
+    this->fundoTexture->loadFromFile("../src/Images/Arid.png");
+    /*this->estradaTexture = new sf::Texture;
+    this->estradaTexture->loadFromFile("../src/Images/Glacial Lvl/Estrada.png");
+    this->tex1Texture = new sf::Texture;
+    this->tex1Texture->loadFromFile ("../src/Images/Glacial Lvl/Tex1.png");
+    this->tex2Texture = new sf::Texture;
+    this->tex2Texture->loadFromFile("../src/Images/Glacial Lvl/Tex2.png");
+    this->tex3Texture = new sf::Texture;
+    this->tex3Texture->loadFromFile("../src/Images/Glacial Lvl/Tex3.png");
+    this->tex4Texture = new sf::Texture;
+    this->tex4Texture->loadFromFile("../src/Images/Glacial Lvl/Tex4.png");
+    this->tex5Texture = new sf::Texture;
+    this->tex5Texture->loadFromFile("../src/Images/Glacial Lvl/Tex5.png");
+    this->tex6Texture = new sf::Texture;
+    this->tex6Texture->loadFromFile("../src/Images/Glacial Lvl/Tex6.png");
+    this->tex7Texture = new sf::Texture;
+    this->tex7Texture->loadFromFile("../src/Images/Glacial Lvl/Tex7.png");*/
     this->bulletTexture = new sf::Texture;
     this->bulletTexture->loadFromFile("../src/Images/enemyBullet.png");
+
 }
 
 void Game::initEnemies() {
@@ -38,11 +53,26 @@ Game::Game() : aliveEnemies(), activeBullets(), activeAttacks(){
 
     this->enemy = new Enemy(750, 500, enemyTexture, this->player);
 
-    this->gamescene = new GameScene(0, 0, gamesceneTexture);
-    this->estrada = new GameScene(0, 0, estradaTexture);
+    this->fundo = new GameScene(0, 0, fundoTexture);
+    /*this->estrada = new GameScene(0, 0, estradaTexture);
+    this->tex1 = new GameScene(20, 0, tex1Texture);
+    this->tex2 = new GameScene(-340, -80, tex2Texture);
+    this->tex3 = new GameScene(-525, -145, tex3Texture);
+    this->tex4 = new GameScene(-690, -20, tex4Texture);
+    this->tex5 = new GameScene(-670, -250, tex5Texture);
+    this->tex6 = new GameScene(-540, -420, tex6Texture);
+    this->tex7 = new GameScene (-20, -380, tex7Texture);*/
 
-    this->gameSceneTree->insert(0,0,gamesceneTexture);
-    this->gameSceneTree->insert(0,0,estradaTexture);
+    this->gameSceneTree->insert(0,0,fundoTexture);
+    /*this->gameSceneTree->insert(0,0,estradaTexture);
+    this->gameSceneTree->insert(20,0,tex1Texture);
+    this->gameSceneTree->insert(-340,-80,tex2Texture);
+    this->gameSceneTree->insert(-525,-145,tex3Texture);
+    this->gameSceneTree->insert(-690,-20,tex4Texture);
+    this->gameSceneTree->insert(-670,-250,tex5Texture);
+    this->gameSceneTree->insert(-540,-420,tex6Texture);
+    this->gameSceneTree->insert(-20,-380,tex7Texture);*/
+
 
     this->initEnemies();
 
@@ -75,7 +105,9 @@ void Game::update(sf::RenderWindow& window) {
         for (auto itEnemy = aliveEnemies.begin(); itEnemy != aliveEnemies.end();) {
             if (*itEnemy != nullptr && (*itEnemy)->checkDamage(*it)) {
                 if (*itEnemy != nullptr) {
+
                     if ((*itEnemy)->hitCount() == 0) {
+
                         killCounter++;
                         enemiesCounter--;
                         itEnemy = aliveEnemies.erase(itEnemy);
@@ -101,7 +133,9 @@ void Game::update(sf::RenderWindow& window) {
 
     for(auto & aliveEnemy : aliveEnemies) {
         if(aliveEnemy != nullptr) {
+
             if (aliveEnemy->hitCount() < 1) {
+
                 (*aliveEnemy).Animation(dtClock);
                 (*aliveEnemy).attack(activeBullets);
                 (*aliveEnemy).followPlayer();
@@ -116,7 +150,9 @@ void Game::update(sf::RenderWindow& window) {
         (*it)->Animation();
         if(this->player->checkDamage(*it)) {
             it = activeBullets.erase(it);
+
             std::cout << "You Lose!!\n";
+
             window.close();
         }
 
@@ -126,13 +162,16 @@ void Game::update(sf::RenderWindow& window) {
     }
 
     if(enemiesCounter == 0){
+
         std::cout << "You won the Level!!\n";
+
     }
 }
 
 
 void Game::render(sf::RenderWindow& window) {
     this->gameSceneTree->render(window,3);
+
 
     this->player->render(window);
 
@@ -161,6 +200,11 @@ Player* Game::getPlayer() const {
 
 std::vector<Enemy*> Game::getEnemies(){
      return aliveEnemies;
+
+}
+
+std::vector<Enemy*> Game::getEnemies(){
+     return aliveEnemies;
 }
 
 
@@ -173,10 +217,12 @@ std::vector<enemyBullet*> Game::getBullets() const {
     return activeBullets;
 }
 
+
 void Game::addBullet() {
     auto pBullet = new enemyBullet(0, 0, bulletTexture, player);
     activeBullets.push_back(pBullet);
 }
+
 
 int Game::getLevel() {
     return level;
@@ -193,6 +239,7 @@ void Game::changeLevel(int newLevel) {
 void Game::changeEnemyCounter(int newEnemyCounter) {
     this->enemiesCounter = newEnemyCounter;
 }
+
 
 
 

@@ -17,15 +17,15 @@ protected:
     sf::Texture* enemyTexture;
 
 
-    sf::Texture* gamesceneTexture;
+    sf::Texture* fundoTexture;
     sf::Texture* estradaTexture;
-    sf::Texture* lakeTexture;
-    sf::Texture* tree1Texture;
-    sf::Texture* tree2Texture;
-    sf::Texture* tree3Texture;
-    sf::Texture* tree4Texture;
-    sf::Texture* cactusTexture;
-    sf::Texture* stoneTexture;
+    sf::Texture* tex1Texture;
+    sf::Texture* tex2Texture;
+    sf::Texture* tex3Texture;
+    sf::Texture* tex4Texture;
+    sf::Texture* tex5Texture;
+    sf::Texture* tex6Texture;
+    sf::Texture* tex7Texture;
     sf::Texture* bulletTexture;
 
     sf::Event sfEvent;
@@ -37,18 +37,18 @@ protected:
     GameSceneTree* gameSceneTree;
     Enemy*enemy;
 
-    GameScene* gamescene;
+    GameScene* fundo;
 
     std::vector<Enemy*> aliveEnemies;
 
     GameScene* estrada;
-    GameScene* lake;
-    GameScene* tree1;
-    GameScene* tree2;
-    GameScene* tree3;
-    GameScene* tree4;
-    GameScene* cactus;
-    GameScene* stone;
+    GameScene* tex1;
+    GameScene* tex2;
+    GameScene* tex3;
+    GameScene* tex4;
+    GameScene* tex5;
+    GameScene* tex6;
+    GameScene* tex7;
 
     std::vector<enemyBullet*> activeBullets;
     std::vector<playerAttack*> activeAttacks;
@@ -57,6 +57,7 @@ protected:
     void initEnemies();
 
 public:
+    int Kills();
 
     int Kills();
 
@@ -68,7 +69,6 @@ public:
     void update(sf::RenderWindow& window);
     void render(sf::RenderWindow& window);
     Player* getPlayer() const;
-
     std::vector<Enemy*> getEnemies();
     int getEnemiesCounter() const;
 
