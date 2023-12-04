@@ -4,21 +4,27 @@
 
 #ifndef EXAME_CES11_GAMEDATA_H
 #define EXAME_CES11_GAMEDATA_H
-#include "../Entities/playerAttack.h"
-#include "../Entities/Enemy.h"
+
+#include "../States/LevelState.h"
+
 #include "../Headers/Game.h"
 
 class GameData {
 public:
     GameData(Game& game);
 
-    void save(const std::string& filename, Game& Game);
+
+    void save(const std::string& filename, Game& Game, LevelState&, int&);
     void addScore(int score);
-    void load(const std:: string& filename, Game& Game);
+    void load(const std:: string& filename, Game& Game, LevelState&, int&);
+
     void ranking(std::vector<int>& scores);
 
     void printScores();
 private:
+
+    LevelState map;
+
     Game game;
     int countBullets = 0;
     int countEnemies = 0;

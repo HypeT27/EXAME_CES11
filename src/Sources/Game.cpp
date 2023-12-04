@@ -25,6 +25,22 @@ void Game::initTextures(){
     this->tex7Texture->loadFromFile("../src/Images/Glacial Lvl/Tex7.png");*/
     this->bulletTexture = new sf::Texture;
     this->bulletTexture->loadFromFile("../src/Images/enemyBullet.png");
+
+}
+
+void Game::initEnemies() {
+    if(enemiesCounter == 0) {
+        enemiesCounter = 2 * level + 3;
+    }
+
+    for (int i = 0; i < enemiesCounter; i++) {
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<> dis(1, 10);
+        int randomX = dis(gen);
+        int randomY = dis(gen);
+        aliveEnemies.push_back(new Enemy(200 + 50 * randomX, 100 + 40 * randomY, enemyTexture, this->player));
+    }
 }
 
 //Constructors/Destructors
@@ -35,9 +51,7 @@ Game::Game() : aliveEnemies(), activeBullets(), activeAttacks(){
 
     this->player = new Player(0,180, playerTexture);
 
-    this->player = new Player(20,300, playerTexture);
     this->enemy = new Enemy(750, 500, enemyTexture, this->player);
-    this->player = new Player(0,0, playerTexture);
 
     this->fundo = new GameScene(0, 0, fundoTexture);
     /*this->estrada = new GameScene(0, 0, estradaTexture);
@@ -58,17 +72,9 @@ Game::Game() : aliveEnemies(), activeBullets(), activeAttacks(){
     this->gameSceneTree->insert(-670,-250,tex5Texture);
     this->gameSceneTree->insert(-540,-420,tex6Texture);
     this->gameSceneTree->insert(-20,-380,tex7Texture);*/
-    
-    enemiesCounter = 6;
 
-    for (int i =0; i<enemiesCounter; i++) {
-        std::random_device rd;
-        std::mt19937 gen(rd());
-        std::uniform_int_distribution<> dis(1, 10);
-        int randomX = dis(gen);
-        int randomY = dis(gen);
-        aliveEnemies.push_back(new Enemy(200+50*randomX, 100+40*randomY, enemyTexture, this->player));
-    }
+
+    this->initEnemies();
 
 }
 
@@ -99,7 +105,9 @@ void Game::update(sf::RenderWindow& window) {
         for (auto itEnemy = aliveEnemies.begin(); itEnemy != aliveEnemies.end();) {
             if (*itEnemy != nullptr && (*itEnemy)->checkDamage(*it)) {
                 if (*itEnemy != nullptr) {
-                    if ((*itEnemy)->hitCount() == 4) {
+
+                    if ((*itEnemy)->hitCount() == 0) {
+
                         killCounter++;
                         enemiesCounter--;
                         itEnemy = aliveEnemies.erase(itEnemy);
@@ -125,7 +133,9 @@ void Game::update(sf::RenderWindow& window) {
 
     for(auto & aliveEnemy : aliveEnemies) {
         if(aliveEnemy != nullptr) {
-            if (aliveEnemy->hitCount() < 5) {
+
+            if (aliveEnemy->hitCount() < 1) {
+
                 (*aliveEnemy).Animation(dtClock);
                 (*aliveEnemy).attack(activeBullets);
                 (*aliveEnemy).followPlayer();
@@ -140,7 +150,9 @@ void Game::update(sf::RenderWindow& window) {
         (*it)->Animation();
         if(this->player->checkDamage(*it)) {
             it = activeBullets.erase(it);
-            std::cout << "You Lose!!";
+
+            std::cout << "You Lose!!\n";
+
             window.close();
         }
 
@@ -150,15 +162,16 @@ void Game::update(sf::RenderWindow& window) {
     }
 
     if(enemiesCounter == 0){
-        std::cout << "You won!!";
-        window.close();
+
+        std::cout << "You won the Level!!\n";
 
     }
 }
 
 
 void Game::render(sf::RenderWindow& window) {
-    this->gameSceneTree->render(window,10);
+    this->gameSceneTree->render(window,3);
+
 
     this->player->render(window);
 
@@ -187,14 +200,46 @@ Player* Game::getPlayer() const {
 
 std::vector<Enemy*> Game::getEnemies(){
      return aliveEnemies;
+
 }
+
+std::vector<Enemy*> Game::getEnemies(){
+     return aliveEnemies;
+}
+
+
+int Game::getEnemiesCounter() const{
+    return enemiesCounter;
+}
+
 
 std::vector<enemyBullet*> Game::getBullets() const {
     return activeBullets;
 }
 
+
 void Game::addBullet() {
     auto pBullet = new enemyBullet(0, 0, bulletTexture, player);
     activeBullets.push_back(pBullet);
 }
+
+
+int Game::getLevel() {
+    return level;
+}
+
+void Game::changeLevel(int newLevel) {
+    this->level = newLevel;
+    this->player->setPosition(0,180);
+    aliveEnemies.clear();
+    activeBullets.clear();
+    initEnemies();
+}
+
+void Game::changeEnemyCounter(int newEnemyCounter) {
+    this->enemiesCounter = newEnemyCounter;
+}
+
+
+
 
