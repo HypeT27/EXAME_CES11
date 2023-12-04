@@ -34,6 +34,8 @@ add_executable(EXAME_CES11 src/Sources/main.cpp
         src/Save/GameData.h
         src/GameScene/GameSceneTree.h
         src/GameScene/GameSceneTree.cpp
+        src/Node/Node.cpp
+        src/States/LevelState.cpp
 
 )
 

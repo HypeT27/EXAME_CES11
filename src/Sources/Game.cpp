@@ -9,22 +9,23 @@ void Game::initTextures(){
     this->gamesceneTexture->loadFromFile("../src/Images/scenario.jpg");
     this->estradaTexture = new sf::Texture;
     this->estradaTexture->loadFromFile("../src/Images/Estrada.png");
-    this->lakeTexture = new sf::Texture;
-    this->lakeTexture->loadFromFile ("../src/Images/Lake.png");
-    this->tree1Texture = new sf::Texture;
-    this->tree1Texture->loadFromFile("../src/Images/Tree1.png");
-    this->tree2Texture = new sf::Texture;
-    this->tree2Texture->loadFromFile("../src/Images/Tree2.png");
-    this->tree3Texture = new sf::Texture;
-    this->tree3Texture->loadFromFile("../src/Images/Tree3.png");
-    this->tree4Texture = new sf::Texture;
-    this->tree4Texture->loadFromFile("../src/Images/Tree4.png");
-    this->cactusTexture = new sf::Texture;
-    this->cactusTexture->loadFromFile("../src/Images/Cactus.png");
-    this->stoneTexture = new sf::Texture;
-    this->stoneTexture->loadFromFile("../src/Images/Stone.png");
     this->bulletTexture = new sf::Texture;
     this->bulletTexture->loadFromFile("../src/Images/enemyBullet.png");
+}
+
+void Game::initEnemies() {
+    if(enemiesCounter == 0) {
+        enemiesCounter = 2 * level + 3;
+    }
+
+    for (int i = 0; i < enemiesCounter; i++) {
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<> dis(1, 10);
+        int randomX = dis(gen);
+        int randomY = dis(gen);
+        aliveEnemies.push_back(new Enemy(200 + 50 * randomX, 100 + 40 * randomY, enemyTexture, this->player));
+    }
 }
 
 //Constructors/Destructors
@@ -35,41 +36,15 @@ Game::Game() : aliveEnemies(), activeBullets(), activeAttacks(){
 
     this->player = new Player(0,180, playerTexture);
 
-    this->player = new Player(20,300, playerTexture);
     this->enemy = new Enemy(750, 500, enemyTexture, this->player);
-    this->player = new Player(0,0, playerTexture);
 
     this->gamescene = new GameScene(0, 0, gamesceneTexture);
     this->estrada = new GameScene(0, 0, estradaTexture);
-    this->lake = new GameScene (-20, -380, lakeTexture);
-    this->tree1 = new GameScene(20, 0, tree1Texture);
-    this->tree2 = new GameScene(-540, -420, tree2Texture);
-    this->tree3 = new GameScene(-670, -250, tree3Texture);
-    this->tree4 = new GameScene(-340, -80, tree4Texture);
-    this->cactus = new GameScene(-525, -145, cactusTexture);
-    this->stone = new GameScene(-690, -20, stoneTexture);
 
     this->gameSceneTree->insert(0,0,gamesceneTexture);
     this->gameSceneTree->insert(0,0,estradaTexture);
-    this->gameSceneTree->insert(-20,-380,lakeTexture);
-    this->gameSceneTree->insert(20,0,tree1Texture);
-    this->gameSceneTree->insert(-540,-420,tree2Texture);
-    this->gameSceneTree->insert(-670,-250,tree3Texture);
-    this->gameSceneTree->insert(-340,-80,tree4Texture);
-    this->gameSceneTree->insert(-525,-145,cactusTexture);
-    this->gameSceneTree->insert(-690,-20,stoneTexture);
 
-
-    enemiesCounter = 6;
-
-    for (int i =0; i<enemiesCounter; i++) {
-        std::random_device rd;
-        std::mt19937 gen(rd());
-        std::uniform_int_distribution<> dis(1, 10);
-        int randomX = dis(gen);
-        int randomY = dis(gen);
-        aliveEnemies.push_back(new Enemy(200+50*randomX, 100+40*randomY, enemyTexture, this->player));
-    }
+    this->initEnemies();
 
 }
 
@@ -100,7 +75,7 @@ void Game::update(sf::RenderWindow& window) {
         for (auto itEnemy = aliveEnemies.begin(); itEnemy != aliveEnemies.end();) {
             if (*itEnemy != nullptr && (*itEnemy)->checkDamage(*it)) {
                 if (*itEnemy != nullptr) {
-                    if ((*itEnemy)->hitCount() == 4) {
+                    if ((*itEnemy)->hitCount() == 0) {
                         killCounter++;
                         enemiesCounter--;
                         itEnemy = aliveEnemies.erase(itEnemy);
@@ -126,7 +101,7 @@ void Game::update(sf::RenderWindow& window) {
 
     for(auto & aliveEnemy : aliveEnemies) {
         if(aliveEnemy != nullptr) {
-            if (aliveEnemy->hitCount() < 5) {
+            if (aliveEnemy->hitCount() < 1) {
                 (*aliveEnemy).Animation(dtClock);
                 (*aliveEnemy).attack(activeBullets);
                 (*aliveEnemy).followPlayer();
@@ -141,7 +116,7 @@ void Game::update(sf::RenderWindow& window) {
         (*it)->Animation();
         if(this->player->checkDamage(*it)) {
             it = activeBullets.erase(it);
-            std::cout << "You Lose!!";
+            std::cout << "You Lose!!\n";
             window.close();
         }
 
@@ -151,15 +126,13 @@ void Game::update(sf::RenderWindow& window) {
     }
 
     if(enemiesCounter == 0){
-        std::cout << "You won!!";
-        window.close();
-
+        std::cout << "You won the Level!!\n";
     }
 }
 
 
 void Game::render(sf::RenderWindow& window) {
-    this->gameSceneTree->render(window,10);
+    this->gameSceneTree->render(window,3);
 
     this->player->render(window);
 
@@ -190,6 +163,12 @@ std::vector<Enemy*> Game::getEnemies(){
      return aliveEnemies;
 }
 
+
+int Game::getEnemiesCounter() const{
+    return enemiesCounter;
+}
+
+
 std::vector<enemyBullet*> Game::getBullets() const {
     return activeBullets;
 }
@@ -198,4 +177,22 @@ void Game::addBullet() {
     auto pBullet = new enemyBullet(0, 0, bulletTexture, player);
     activeBullets.push_back(pBullet);
 }
+
+int Game::getLevel() {
+    return level;
+}
+
+void Game::changeLevel(int newLevel) {
+    this->level = newLevel;
+    this->player->setPosition(0,180);
+    aliveEnemies.clear();
+    activeBullets.clear();
+    initEnemies();
+}
+
+void Game::changeEnemyCounter(int newEnemyCounter) {
+    this->enemiesCounter = newEnemyCounter;
+}
+
+
 

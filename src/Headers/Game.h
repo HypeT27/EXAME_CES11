@@ -9,7 +9,8 @@
 
 class Game{
 protected:
-    int enemiesCounter;
+    int level = 1;
+    int enemiesCounter = 0;
     int killCounter = 0;
 
     sf::Texture* playerTexture;
@@ -49,13 +50,14 @@ protected:
     GameScene* cactus;
     GameScene* stone;
 
-
     std::vector<enemyBullet*> activeBullets;
     std::vector<playerAttack*> activeAttacks;
 
     void initTextures();
+    void initEnemies();
 
 public:
+
     int Kills();
 
     Game();
@@ -66,10 +68,17 @@ public:
     void update(sf::RenderWindow& window);
     void render(sf::RenderWindow& window);
     Player* getPlayer() const;
+
     std::vector<Enemy*> getEnemies();
+    int getEnemiesCounter() const;
+
     std::vector<enemyBullet *> getBullets() const;
     void addBullet();
 
+    void nextLevel();
+    int getLevel();
+    void changeLevel(int level);
+    void changeEnemyCounter(int);
 
 };
 
