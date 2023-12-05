@@ -32,7 +32,6 @@ public:
     void updateTime();
     void deleteLastFloat(const std::string& fileName);
 
-    //pra fz o save dps
     void loadGame();
     void newGame();
     void saveGame();

@@ -4,16 +4,11 @@
 
 class MenuState {
 private:
-
-    sf::RectangleShape* winclose;
-    sf::Font* font;
     sf::Event sfEvent;
     sf::Texture* menuTexture;
     sf::Sprite* menu;
     sf::Texture* menuBackground;
     sf::Sprite* background;
-
-
 
     std::vector<const char*> menuOptions;
     std::vector<sf::Vector2f> wordCoords;

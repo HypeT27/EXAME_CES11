@@ -31,20 +31,11 @@ protected:
     sf::Time dt;
 
     Player* player;
+    Enemy* enemy;
 
     GameSceneTree* gameSceneTree;
-    Enemy*enemy;
 
     std::vector<Enemy*> aliveEnemies;
-
-    GameScene* estrada;
-    GameScene* tex1;
-    GameScene* tex2;
-    GameScene* tex3;
-    GameScene* tex4;
-    GameScene* tex5;
-    GameScene* tex6;
-    GameScene* tex7;
 
     std::vector<enemyBullet*> activeBullets;
     std::vector<playerAttack*> activeAttacks;
@@ -53,8 +44,6 @@ protected:
     void initEnemies();
 
 public:
-    int Kills();
-
     Game();
     ~Game();
 

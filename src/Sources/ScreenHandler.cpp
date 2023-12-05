@@ -233,8 +233,6 @@ void ScreenHandler::deleteLastFloat(const std::string& fileName) {
         for (const float& newValue : floats) {
             outputFile << newValue << '\n';
         }
-
-        std::cout << "Ultimo float removido com sucesso." << std::endl;
     }
     else std::cerr << "Erro ao abrir o arquivo." << std::endl;
 }
