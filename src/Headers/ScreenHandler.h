@@ -28,6 +28,9 @@ public:
 
     void render(sf::RenderWindow& window);
     void update(sf::RenderWindow& window);
+    void printTimes(std::vector<float>&);
+    void updateTime();
+    void deleteLastFloat(const std::string& fileName);
 
     //pra fz o save dps
     void loadGame();
@@ -38,7 +41,9 @@ public:
 
     int renderState = 0;
     int levelsCompleted = 0;
-
+private:
+    sf::Time gameTotalTime;
+    sf::Clock gameClock;
 };
 
 

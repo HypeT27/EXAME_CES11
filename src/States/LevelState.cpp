@@ -13,8 +13,7 @@ LevelState::LevelState() {
 
 void LevelState::setValues() {
     map->setPosition(0,0);
-    mapTexture->loadFromFile("../src/Images/Game map.png");
-    map->setTexture(*mapTexture);
+    this->setTexture();
 
     level1.defineLevel(1);
     level2.defineLevel(2);
@@ -42,7 +41,26 @@ void LevelState::render(sf::RenderWindow &window) {
 }
 
 void LevelState::update(sf::RenderWindow &window) {
+    setTexture();
     while(window.pollEvent(this->sfEvent))
         if(this->sfEvent.type == sf::Event::Closed)
             window.close();
+}
+
+void LevelState::setTexture() {
+    mapTexture->loadFromFile("../src/Images/beginMap.jpg");
+    map->setTexture(*mapTexture);
+
+    if(level1.isVisited) {
+        mapTexture->loadFromFile("../src/Images/pre2Map.jpg");
+        map->setTexture(*mapTexture);
+    }
+    if(level2.isVisited){
+        mapTexture->loadFromFile("../src/Images/pre3or4Map.jpg");
+        map->setTexture(*mapTexture);
+    }
+    if(level3.isVisited || level4.isVisited){
+        mapTexture->loadFromFile("../src/Images/finalMap.jpg");
+        map->setTexture(*mapTexture);
+    }
 }

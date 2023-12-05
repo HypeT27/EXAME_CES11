@@ -18,7 +18,6 @@ void ScreenHandler::update(sf::RenderWindow& window) {
 
             if(game.getEnemiesCounter() == 0){
                 this->renderState = LEVELSCREEN;
-                saveGame();
                 break;
             }
 
@@ -125,8 +124,12 @@ void ScreenHandler::update(sf::RenderWindow& window) {
                 saveGame();
                 break;
             }
-            if(levelsCompleted == 5){
+            if(levelsCompleted == 5) {
                 std::cout << "You Won the Game!!" << std::endl;
+                gameTotalTime += gameClock.getElapsedTime();
+                std::cout << "Time to complete the game: " << gameTotalTime.asSeconds() << " segundos" << std::endl;
+                gameData.saveTime("../src/Save/savetimes.txt",gameTotalTime);
+                printTimes(gameData.existentTimes);
                 window.close();
             }
             break;
@@ -157,20 +160,22 @@ void ScreenHandler::newGame() {
     level.level2.isVisited = false;
     level.level3.isVisited = false;
     level.level4.isVisited = false;
+    gameClock.restart();
+    std::cout << "Creating New Game.. \n";
 }
 
 void ScreenHandler::loadGame() {
-    this->gameData.load("../src/Save/savegame.txt", game, level, levelsCompleted);
-    gameData.printScores();
+    updateTime();
 
+    this->gameData.load("../src/Save/savegame.txt", game, level, levelsCompleted);
+    std::cout << "Game Loaded!! \n";
 }
 
 void ScreenHandler::saveGame() {
-    int kills = this->game.Kills();
-    this->gameData.addScore(kills);
-    gameData.printScores();
-
+    gameTotalTime += gameClock.getElapsedTime();
+    gameData.saveTime("../src/Save/savetimes.txt",gameTotalTime);
     this->gameData.save("../src/Save/savegame.txt", game, level, levelsCompleted);
+    std::cout << "Saved Successfully!!\n";
 }
 
 Node& ScreenHandler::actualLevel() {
@@ -186,4 +191,52 @@ Node& ScreenHandler::actualLevel() {
         return level.level5;
     throw std::out_of_range("This level doesn't exists\n");
 }
+
+void ScreenHandler::printTimes(std::vector<float>& existentTimes) {
+    gameData.rankingTimes(existentTimes);
+    std::cout << "Top 6 World Ranking: \n";
+    std::cout << "---------------\n";
+    for(int i = 0; i < existentTimes.size(); i++)
+        std::cout << i + 1 << ": " << existentTimes[i] << std::endl;
+    std::cout << "---------------\n";
+}
+
+void ScreenHandler::updateTime() {
+    std::vector<float> savedTimes = this->gameData.loadTime("../src/Save/savetimes.txt");
+
+    float lastSavedTimeFloat = this->gameData.getLastTime(savedTimes);
+    deleteLastFloat("../src/save/savetimes.txt");
+
+
+    sf::Time lastSavedTime  = sf::seconds(lastSavedTimeFloat);
+    gameTotalTime += lastSavedTime;
+}
+
+void ScreenHandler::deleteLastFloat(const std::string& fileName) {
+    std::ifstream inputFile(fileName);
+    std::vector<float> floats;
+
+    if (inputFile.is_open()) {
+        float value;
+
+        while (inputFile >> value) {
+            floats.push_back(value);
+        }
+
+        inputFile.close();
+
+        if (!floats.empty()) {
+            floats.pop_back();
+        }
+
+        std::ofstream outputFile(fileName);
+        for (const float& newValue : floats) {
+            outputFile << newValue << '\n';
+        }
+
+        std::cout << "Ultimo float removido com sucesso." << std::endl;
+    }
+    else std::cerr << "Erro ao abrir o arquivo." << std::endl;
+}
+
 

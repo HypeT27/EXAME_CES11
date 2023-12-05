@@ -23,6 +23,7 @@ public:
 
     LevelState();
     void setValues();
+    void setTexture();
     void render(sf::RenderWindow& window);
     void update(sf::RenderWindow& window);
 };

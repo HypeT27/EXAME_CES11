@@ -13,23 +13,21 @@ class GameData {
 public:
     GameData(Game& game);
 
-
     void save(const std::string& filename, Game& Game, LevelState&, int&);
-    void addScore(int score);
     void load(const std:: string& filename, Game& Game, LevelState&, int&);
 
-    void ranking(std::vector<int>& scores);
+    void saveTime(const std::string &filename, sf::Time &);
+    std::vector<float> loadTime(const std::string &filename);
+    float getLastTime(std::vector<float>);
 
-    void printScores();
+    void rankingTimes(std::vector<float>&);
+    std::vector<float> existentTimes;
 private:
-
     LevelState map;
 
     Game game;
     int countBullets = 0;
     int countEnemies = 0;
-    int countAttacks = 0;
-    std::vector<int> scores;
 
 };
 

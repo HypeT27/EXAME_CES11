@@ -24,14 +24,6 @@ void GameData::save(const std::string &filename, Game& Game, LevelState& Map, in
         fprintf(file, "%d\n", map.level3.isVisited);
         fprintf(file, "%d\n", map.level4.isVisited);
 
-        int numScores = scores.size();
-        fprintf(file, "%d\n", numScores);
-
-        for (size_t i = 0; i < numScores; ++i) {
-            int score = scores[i];
-            fprintf(file, "%d\n", score);
-        }
-
         game.getPlayer()->serialize(file);
 
         countEnemies = game.getEnemies().size();
@@ -70,8 +62,8 @@ void GameData::load(const std::string &filename, Game& Game, LevelState& Map, in
         int playerOn2;
         fscanf(file, "%d", &playerOn2);
         if(playerOn2 == 0)
-            Map.level1.isPlayerOnMe = false;
-        else Map.level1.isPlayerOnMe = true;
+            Map.level2.isPlayerOnMe = false;
+        else Map.level2.isPlayerOnMe = true;
 
         int playerOn3;
         fscanf(file, "%d", &playerOn3);
@@ -109,16 +101,6 @@ void GameData::load(const std::string &filename, Game& Game, LevelState& Map, in
             Map.level4.isVisited = false;
         else Map.level4.isVisited = true;
 
-        int numScores;
-        fscanf(file, "%d", &numScores);
-
-        for (size_t i = 0; i < numScores; ++i) {
-            int NewScore;
-            fscanf(file, "%d", &NewScore);
-
-            scores.push_back(NewScore);
-
-        }
 
         Game.getPlayer()->deserialize(file);
 
@@ -141,42 +123,55 @@ void GameData::load(const std::string &filename, Game& Game, LevelState& Map, in
     }
 }
 
-void GameData::addScore(int score) {
-    scores.push_back(score);
-}
-
-void GameData::printScores() {
-    ranking(scores);
-    if (scores.empty()) {
-        std::cout << "Nenhum score disponivel.\n";
-        return;
-    }
-    std::cout << "------------" << std::endl;
-    for(int i = 0; i < scores.size(); i++) {
-        if(i < 6)
-            std::cout << i + 1 << ": " << scores[i] << std::endl;
-    }
-    std::cout << "------------" << std::endl;
-}
-
-void GameData::ranking(std::vector<int>& scores) {
-    int aux;
-
-    for (int i=0; i < scores.size(); ++i){
-        for (int j=i; j < scores.size(); ++j){
-            if (scores[i] < scores[j]){
-                aux = scores[i];
-                scores[i] = scores[j];
-                scores[j] = aux;
-            }
-        }
-    }
-}
-
 GameData::GameData(Game& Game) {
     game = Game;
 }
 
+void GameData::saveTime(const std::string &filename, sf::Time &timePassed) {
+    existentTimes = loadTime(filename);
+    existentTimes.push_back(timePassed.asSeconds());
 
+    if(existentTimes.size() > 6)
+        existentTimes.resize(6);\
 
+    FILE* file = fopen(filename.c_str(), "w");
+    if(file)
+        for(float time: existentTimes)
+            fprintf(file, "%f\n", time);
 
+    fclose(file);
+}
+
+std::vector<float> GameData::loadTime(const std::string &filename) {
+    std::vector<float> times;
+    FILE* file = fopen(filename.c_str(), "r");
+
+    if (file) {
+        float time;
+        while (fscanf(file, "%f\n", &time) != EOF) {
+            times.push_back(time);
+        }
+        fclose(file);
+    }
+    return times;
+}
+
+void GameData::rankingTimes(std::vector<float> &existentTimes) {
+    float aux;
+
+    for (int i=0; i < existentTimes.size(); ++i){
+        for (int j=i; j < existentTimes.size(); ++j){
+            if (existentTimes[i] > existentTimes[j]){
+                aux = existentTimes[i];
+                existentTimes[i] = existentTimes[j];
+                existentTimes[j] = aux;
+            }
+        }
+    }
+
+}
+
+float GameData::getLastTime(std::vector<float> existentTimes) {
+    if(!existentTimes.empty())
+        return existentTimes.back();
+}
