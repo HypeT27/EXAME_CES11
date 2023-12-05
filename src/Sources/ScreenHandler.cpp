@@ -43,17 +43,18 @@ void ScreenHandler::update(sf::RenderWindow& window) {
 
         case LEVELSCREEN:
             level.update(window);
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)){
-                if(!level.level1.isVisited) {
-                    level.level1.isPlayerOnMe = true;
-                    game.changeLevel(1);
-                    level.level1.isVisited = true;
-                    this->renderState = GAMESCREEN;
-                    levelsCompleted++;
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) {
+                if (actualLevel().points(&level.level1)) {
+                    if (!level.level1.isVisited) {
+                        level.level1.isPlayerOnMe = true;
+                        game.changeLevel(1);
+                        level.level1.isVisited = true;
+                        this->renderState = GAMESCREEN;
+                        levelsCompleted++;
+                        break;
+                    } else std::cout << "Already make this level";
                     break;
                 }
-                else std::cout << "Already make this level";
-                break;
             }
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)){
                 if(actualLevel().points(&level.level2)) {
@@ -103,12 +104,28 @@ void ScreenHandler::update(sf::RenderWindow& window) {
                 else std::cout << "Can't access this level\n";
                 break;
             }
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num5)){
+                if(actualLevel().points(&level.level5)) {
+                    actualLevel().isPlayerOnMe = false;
+                    if (!level.level5.isVisited) {
+                        level.level5.isPlayerOnMe = true;
+                        game.changeLevel(5);
+                        level.level5.isVisited = true;
+                        this->renderState = GAMESCREEN;
+                        levelsCompleted++;
+                        break;
+                    } else std::cout << "Already make this level";
+                    break;
+                }
+                else std::cout << "Can't access this level\n";
+                break;
+            }
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
                 this->renderState = MENUSCREEN;
                 saveGame();
                 break;
             }
-            if(levelsCompleted == 4){
+            if(levelsCompleted == 5){
                 std::cout << "You Won the Game!!" << std::endl;
                 window.close();
             }
@@ -123,6 +140,9 @@ void ScreenHandler::render(sf::RenderWindow& window) {
             break;
         case MENUSCREEN:
             menu.render(window);
+            break;
+        case LEVELSCREEN:
+            level.render(window);
             break;
     }
 }
@@ -162,6 +182,8 @@ Node& ScreenHandler::actualLevel() {
         return level.level3;
     if(game.getLevel() == 4)
         return level.level4;
+    if(game.getLevel() == 5)
+        return level.level5;
     throw std::out_of_range("This level doesn't exists\n");
 }
 

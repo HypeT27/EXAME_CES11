@@ -17,15 +17,13 @@ protected:
     sf::Texture* enemyTexture;
 
 
-    sf::Texture* fundoTexture;
-    sf::Texture* estradaTexture;
-    sf::Texture* tex1Texture;
-    sf::Texture* tex2Texture;
-    sf::Texture* tex3Texture;
-    sf::Texture* tex4Texture;
-    sf::Texture* tex5Texture;
-    sf::Texture* tex6Texture;
-    sf::Texture* tex7Texture;
+    sf::Texture* fundolevel1Texture;
+    sf::Texture* fundolevel2Texture;
+    sf::Texture* fundolevel3Texture;
+    sf::Texture* fundolevel4Texture;
+    sf::Texture* fundolevel5Texture;
+
+
     sf::Texture* bulletTexture;
 
     sf::Event sfEvent;
@@ -36,8 +34,6 @@ protected:
 
     GameSceneTree* gameSceneTree;
     Enemy*enemy;
-
-    GameScene* fundo;
 
     std::vector<Enemy*> aliveEnemies;
 
@@ -57,8 +53,6 @@ protected:
     void initEnemies();
 
 public:
-    int Kills();
-
     int Kills();
 
     Game();

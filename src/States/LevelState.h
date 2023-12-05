@@ -19,6 +19,7 @@ public:
     Node level2;
     Node level3;
     Node level4;
+    Node level5;
 
     LevelState();
     void setValues();

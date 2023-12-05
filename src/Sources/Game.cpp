@@ -5,24 +5,16 @@ void Game::initTextures(){
     this->playerTexture->loadFromFile("../src/Images/Animations2.png");
     this->enemyTexture = new sf::Texture;
     this->enemyTexture->loadFromFile("../src/Images/EnemyShaman.png");
-    this->fundoTexture = new sf::Texture;
-    this->fundoTexture->loadFromFile("../src/Images/Arid.png");
-    /*this->estradaTexture = new sf::Texture;
-    this->estradaTexture->loadFromFile("../src/Images/Glacial Lvl/Estrada.png");
-    this->tex1Texture = new sf::Texture;
-    this->tex1Texture->loadFromFile ("../src/Images/Glacial Lvl/Tex1.png");
-    this->tex2Texture = new sf::Texture;
-    this->tex2Texture->loadFromFile("../src/Images/Glacial Lvl/Tex2.png");
-    this->tex3Texture = new sf::Texture;
-    this->tex3Texture->loadFromFile("../src/Images/Glacial Lvl/Tex3.png");
-    this->tex4Texture = new sf::Texture;
-    this->tex4Texture->loadFromFile("../src/Images/Glacial Lvl/Tex4.png");
-    this->tex5Texture = new sf::Texture;
-    this->tex5Texture->loadFromFile("../src/Images/Glacial Lvl/Tex5.png");
-    this->tex6Texture = new sf::Texture;
-    this->tex6Texture->loadFromFile("../src/Images/Glacial Lvl/Tex6.png");
-    this->tex7Texture = new sf::Texture;
-    this->tex7Texture->loadFromFile("../src/Images/Glacial Lvl/Tex7.png");*/
+    this->fundolevel1Texture = new sf::Texture;
+    this->fundolevel1Texture->loadFromFile("../src/Images/Forest.png");
+    this->fundolevel2Texture = new sf::Texture;
+    this->fundolevel2Texture->loadFromFile("../src/Images/Arid.png");
+    this->fundolevel3Texture = new sf::Texture;
+    this->fundolevel3Texture->loadFromFile("../src/Images/Glacial.png");
+    this->fundolevel4Texture = new sf::Texture;
+    this->fundolevel4Texture->loadFromFile("../src/Images/Ruins.png");
+    this->fundolevel5Texture = new sf::Texture;
+    this->fundolevel5Texture->loadFromFile("../src/Images/Dark Forest.png");
     this->bulletTexture = new sf::Texture;
     this->bulletTexture->loadFromFile("../src/Images/enemyBullet.png");
 
@@ -53,26 +45,11 @@ Game::Game() : aliveEnemies(), activeBullets(), activeAttacks(){
 
     this->enemy = new Enemy(750, 500, enemyTexture, this->player);
 
-    this->fundo = new GameScene(0, 0, fundoTexture);
-    /*this->estrada = new GameScene(0, 0, estradaTexture);
-    this->tex1 = new GameScene(20, 0, tex1Texture);
-    this->tex2 = new GameScene(-340, -80, tex2Texture);
-    this->tex3 = new GameScene(-525, -145, tex3Texture);
-    this->tex4 = new GameScene(-690, -20, tex4Texture);
-    this->tex5 = new GameScene(-670, -250, tex5Texture);
-    this->tex6 = new GameScene(-540, -420, tex6Texture);
-    this->tex7 = new GameScene (-20, -380, tex7Texture);*/
-
-    this->gameSceneTree->insert(0,0,fundoTexture);
-    /*this->gameSceneTree->insert(0,0,estradaTexture);
-    this->gameSceneTree->insert(20,0,tex1Texture);
-    this->gameSceneTree->insert(-340,-80,tex2Texture);
-    this->gameSceneTree->insert(-525,-145,tex3Texture);
-    this->gameSceneTree->insert(-690,-20,tex4Texture);
-    this->gameSceneTree->insert(-670,-250,tex5Texture);
-    this->gameSceneTree->insert(-540,-420,tex6Texture);
-    this->gameSceneTree->insert(-20,-380,tex7Texture);*/
-
+    this->gameSceneTree->insert(0,0,fundolevel1Texture);
+    this->gameSceneTree->insert(0,0,fundolevel2Texture);
+    this->gameSceneTree->insert(0,0,fundolevel3Texture);
+    this->gameSceneTree->insert(0,0,fundolevel4Texture);
+    this->gameSceneTree->insert(0,0,fundolevel5Texture);
 
     this->initEnemies();
 
@@ -170,7 +147,7 @@ void Game::update(sf::RenderWindow& window) {
 
 
 void Game::render(sf::RenderWindow& window) {
-    this->gameSceneTree->render(window,3);
+    this->gameSceneTree->render(window,level - 1);
 
 
     this->player->render(window);
@@ -203,11 +180,6 @@ std::vector<Enemy*> Game::getEnemies(){
 
 }
 
-std::vector<Enemy*> Game::getEnemies(){
-     return aliveEnemies;
-}
-
-
 int Game::getEnemiesCounter() const{
     return enemiesCounter;
 }
@@ -230,7 +202,8 @@ int Game::getLevel() {
 
 void Game::changeLevel(int newLevel) {
     this->level = newLevel;
-    this->player->setPosition(0,180);
+    if(enemiesCounter == 0)
+        this->player->setPosition(0,180);
     aliveEnemies.clear();
     activeBullets.clear();
     initEnemies();
