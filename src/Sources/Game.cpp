@@ -22,7 +22,7 @@ void Game::initTextures(){
 
 void Game::initEnemies() {
     if(enemiesCounter == 0) {
-        enemiesCounter = 2 * level + 3;
+        enemiesCounter = 1;
     }
 
     for (int i = 0; i < enemiesCounter; i++) {

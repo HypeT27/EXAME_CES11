@@ -26,7 +26,6 @@ void MenuState::set_values() {
     background->setPosition(0,0);
     background->setScale(1.05,1.05);
 
-    pressed=theselect= false;
     menuTexture->loadFromFile("../src/Images/Menu.png"); //achar textura!!!
     menuBackground->loadFromFile("../src/Images/backgroundmenu.jpg");
 
@@ -39,18 +38,6 @@ void MenuState::render(sf::RenderWindow& window) {
     window.draw(*background);
     window.draw(*menu);
 }
-
-
-
-void MenuState::loop_events(sf::RenderWindow& window) {
-    sf::Event event;
-    while(window.pollEvent(event)){
-        if(event.type == sf::Event::Closed) {
-            window.close();
-        }
-    }
-}
-
 
 
 void MenuState::update(sf::RenderWindow& window) {
