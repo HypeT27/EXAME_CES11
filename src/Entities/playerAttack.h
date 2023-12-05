@@ -20,7 +20,6 @@ public:
     void followDirection(sf::RenderWindow& window);
 
     sf::Vector2f getDirection(sf::RenderWindow& window);
-    void setDirection(float x, float y);
 };
 
 

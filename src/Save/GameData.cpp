@@ -172,6 +172,5 @@ void GameData::rankingTimes(std::vector<float> &existentTimes) {
 }
 
 float GameData::getLastTime(std::vector<float> existentTimes) {
-    if(!existentTimes.empty())
-        return existentTimes.back();
+    return existentTimes.back();
 }

@@ -167,10 +167,6 @@ void Game::render(sf::RenderWindow& window) {
 
 }
 
-int Game::Kills() {
-    return killCounter;
-}
-
 Player* Game::getPlayer() const {
     return player;
 }

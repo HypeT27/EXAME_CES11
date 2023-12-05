@@ -24,8 +24,6 @@ private:
     GameScene* root;
 
     GameScene* insertRecursive(GameScene* node, int posic_x, int posic_y, sf::Texture* texture);
-    //void destroyTree(GameScene* node);
-
 };
 
 

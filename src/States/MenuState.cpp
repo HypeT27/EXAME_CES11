@@ -1,9 +1,6 @@
 #include "MenuState.h"
 
 MenuState::MenuState() {
-
-    winclose = new sf::RectangleShape();
-    font = new sf::Font();
     menuTexture = new sf::Texture();
     menu = new sf::Sprite();
     menuBackground = new sf::Texture();
@@ -13,8 +10,6 @@ MenuState::MenuState() {
 }
 
 MenuState::~MenuState() {
-    delete winclose;
-    delete font;
     delete menuTexture;
     delete menu;
     delete menuBackground;
