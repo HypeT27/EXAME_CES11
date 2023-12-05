@@ -2,7 +2,7 @@
 
 This is a RPG Action Game build for your mouse to crash!
 
-Get ready to kill all the enemies in all the world!! They are waiting for you...
+Get ready to kill the enemies in every place of the world!! They are waiting for you...
 
 ![World Map](src/Images/beginMap.jpg)
 
