@@ -22,7 +22,7 @@ void Game::initTextures(){
 
 void Game::initEnemies() {
     if(enemiesCounter == 0) {
-        enemiesCounter = 1;
+        enemiesCounter = 2 * level + 3;
     }
 
     for (int i = 0; i < enemiesCounter; i++) {
@@ -83,7 +83,7 @@ void Game::update(sf::RenderWindow& window) {
             if (*itEnemy != nullptr && (*itEnemy)->checkDamage(*it)) {
                 if (*itEnemy != nullptr) {
 
-                    if ((*itEnemy)->hitCount() == 0) {
+                    if ((*itEnemy)->hitCount() == 3) {
 
                         killCounter++;
                         enemiesCounter--;
@@ -111,7 +111,7 @@ void Game::update(sf::RenderWindow& window) {
     for(auto & aliveEnemy : aliveEnemies) {
         if(aliveEnemy != nullptr) {
 
-            if (aliveEnemy->hitCount() < 1) {
+            if (aliveEnemy->hitCount() < 4) {
 
                 (*aliveEnemy).Animation(dtClock);
                 (*aliveEnemy).attack(activeBullets);
